@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
+import { ScheduleContainer } from './components/Schedule'
+import { BetRecommendationsContainer } from './components/BetRecommendations'
+import { MarketLineGraphContainer } from './components/MarketLineGraph'
+import { MarketHistoryContainer } from './components/MarketHistory'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Row>
+        <Col>
+          <Row>
+            <MarketLineGraphContainer />
+          </Row>
+
+          <Row>
+            <Col>
+              <MarketHistoryContainer />
+            </Col>
+            <Col>
+              <MarketHistoryContainer />
+            </Col>
+          </Row>
+        </Col>
+
+        <Col>
+          <Row>
+            <ScheduleContainer />
+          </Row>
+
+          <Row>
+            <BetRecommendationsContainer />
+          </Row>
+        </Col>
+      </Row>
+    </>
+  )
 }
 
 export default App;
