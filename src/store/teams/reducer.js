@@ -1,15 +1,15 @@
 import { ajaxBaseState } from 'flux-entities'
 
 import {
-  FETCH_SCHEDULE_REQUEST,
-  FETCH_SCHEDULE_SUCCESS,
-  FETCH_SCHEDULE_FAILURE,
+  FETCH_TEAMS_REQUEST,
+  FETCH_TEAMS_SUCCESS,
+  FETCH_TEAMS_FAILURE,
 } from './actions'
 
 const initialState = ajaxBaseState()
 
-const gamesReducer = (state = initialState, action) => {
-  if (action.type === FETCH_SCHEDULE_REQUEST) {
+const teams = (state = initialState, action) => {
+  if (action.type === FETCH_TEAMS_REQUEST) {
     return {
       ...state,
       loading: true,
@@ -17,7 +17,7 @@ const gamesReducer = (state = initialState, action) => {
     }
   }
 
-  if (action.type === FETCH_SCHEDULE_FAILURE) {
+  if (action.type === FETCH_TEAMS_FAILURE) {
     return {
       ...state,
       loading: false,
@@ -25,7 +25,7 @@ const gamesReducer = (state = initialState, action) => {
     }
   }
 
-  if (action.type === FETCH_SCHEDULE_SUCCESS) {
+  if (action.type === FETCH_TEAMS_SUCCESS) {
     console.log(action.payload)
     const newState = action.payload.reduce((acc, curr) => {
       return {
@@ -45,5 +45,5 @@ const gamesReducer = (state = initialState, action) => {
 }
 
 export {
-  gamesReducer
+  teams
 }

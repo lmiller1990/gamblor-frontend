@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 
+import { UpcomingGamesContainer } from './components/UpcomingGames'
+
 function Schedule({ fetchSchedule, fetchLeagues, leagues }) {
   const [selectedLeagueName, setSelectedLeagueName] = useState()
+  const [selectedLeagueId, setSelectedLeagueId] = useState()
 
   useEffect(() => {
     fetchLeagues()
@@ -39,6 +42,7 @@ function Schedule({ fetchSchedule, fetchLeagues, leagues }) {
         onClick={
           () => {
             setSelectedLeagueName(league.name)
+            setSelectedLeagueId(league.id)
             fetchSchedule(league.name)
           }
         }
@@ -56,6 +60,9 @@ function Schedule({ fetchSchedule, fetchLeagues, leagues }) {
 
       <div>
         Games
+        <UpcomingGamesContainer
+          leagueId={selectedLeagueId}
+        />
       </div>
     </div>
   )
