@@ -21,7 +21,6 @@ const fetchSchedule = ({ leagueName }) => {
         ]
       })
 
-      console.log(data)
       dispatch(fetchScheduleSuccess(data))
     } catch (e) {
       dispatch(fetchScheduleFailure(e.message))

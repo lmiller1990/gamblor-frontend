@@ -3,6 +3,7 @@ import { mapEntities } from 'flux-entities'
 
 import { Schedule } from './Schedule'
 import { fetchLeagues } from '../../store/leagues/actions'
+import { fetchRecommendations } from '../../store/recommendations/actions'
 import { fetchSchedule } from '../../store/games/actions'
 
 const mapStateToProps = state => {
@@ -14,7 +15,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchLeagues: () => dispatch(fetchLeagues()),
-    fetchSchedule: leagueName => dispatch(fetchSchedule({ leagueName }))
+    fetchSchedule: leagueName => dispatch(fetchSchedule({ leagueName })),
+    fetchRecommendations: gameIds => dispatch(fetchRecommendations({ gameIds }))
   }
 }
 const ScheduleContainer = connect(mapStateToProps, mapDispatchToProps)(Schedule)

@@ -48,7 +48,7 @@ function App({ fetchTeams }) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchTeams: () => dispatch(fetchTeams())
+    fetchTeams: () => dispatch(fetchTeams()),
   }
 }
 

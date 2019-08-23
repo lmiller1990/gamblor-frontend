@@ -26,7 +26,6 @@ const teams = (state = initialState, action) => {
   }
 
   if (action.type === FETCH_TEAMS_SUCCESS) {
-    console.log(action.payload)
     const newState = action.payload.reduce((acc, curr) => {
       return {
         ids: [ ...acc.ids, curr.id ],
