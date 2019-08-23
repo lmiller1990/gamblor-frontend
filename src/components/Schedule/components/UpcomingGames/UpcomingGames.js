@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import moment from 'moment'
 
 function UpcomingGames({ games, allTeams, fetchRecommendations }) {
-  useEffect(() => {
-    const gameIds = games.map(x => x.id).join(',')
-    if (gameIds) {
-      fetchRecommendations(gameIds)
-    }
-  }, [fetchRecommendations, games])
-
   const showGame = game => {
     return (
       <div 

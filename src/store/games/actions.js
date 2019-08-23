@@ -1,6 +1,8 @@
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 
+import { fetchRecommendations } from '../recommendations/actions'
+
 const FETCH_SCHEDULE_REQUEST = 'FETCH_SCHEDULE_REQUEST'
 const FETCH_SCHEDULE_SUCCESS = 'FETCH_SCHEDULE_SUCCESS'
 const FETCH_SCHEDULE_FAILURE = 'FETCH_SCHEDULE_FAILURE'
@@ -22,6 +24,8 @@ const fetchSchedule = ({ leagueName }) => {
       })
 
       dispatch(fetchScheduleSuccess(data))
+      const gameIds = data.map(x => x.id)
+      dispatch(fetchRecommendations({ gameIds }))
     } catch (e) {
       dispatch(fetchScheduleFailure(e.message))
     }
