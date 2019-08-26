@@ -4,8 +4,8 @@ import * as types from './constants'
 
 const initialState = ajaxBaseState()
 
-const gamesReducer = (state = initialState, action) => {
-  if (action.type === types.FETCH_SCHEDULE_REQUEST) {
+const pastGames = (state = initialState, action) => {
+  if (action.type === types.FETCH_PAST_GAMES_FOR_TEAM_REQUEST) {
     return {
       ...state,
       loading: true,
@@ -13,7 +13,7 @@ const gamesReducer = (state = initialState, action) => {
     }
   }
 
-  if (action.type === types.FETCH_SCHEDULE_FAILURE) {
+  if (action.type === types.FETCH_PAST_GAMES_FOR_TEAM_FAILURE) {
     return {
       ...state,
       loading: false,
@@ -21,13 +21,14 @@ const gamesReducer = (state = initialState, action) => {
     }
   }
 
-  if (action.type === types.FETCH_SCHEDULE_SUCCESS) {
+  if (action.type === types.FETCH_PAST_GAMES_FOR_TEAM_SUCCESS) {
+    // add on top of existing games in state
     const newState = action.payload.reduce((acc, curr) => {
       return {
-        ids: [ ...acc.ids, curr.id ],
-        all: { ...acc.all, [curr.id]: curr }
+        ids: [ ...acc.ids, curr.gameId ],
+        all: { ...acc.all, [curr.gameId]: curr }
       }
-    }, { ids: [], all: {} })
+    }, { ids: [...state.ids], all: {...state.all} })
 
     return {
       ...state,
@@ -40,5 +41,5 @@ const gamesReducer = (state = initialState, action) => {
 }
 
 export {
-  gamesReducer
+  pastGames
 }

@@ -1,15 +1,12 @@
 import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 
+import * as types from './constants'
 import { fetchRecommendations } from '../recommendations/actions'
 
-const FETCH_SCHEDULE_REQUEST = 'FETCH_SCHEDULE_REQUEST'
-const FETCH_SCHEDULE_SUCCESS = 'FETCH_SCHEDULE_SUCCESS'
-const FETCH_SCHEDULE_FAILURE = 'FETCH_SCHEDULE_FAILURE'
-
-const fetchScheduleRequest = () => ({ type: FETCH_SCHEDULE_REQUEST })
-const fetchScheduleSuccess = payload => ({ type: FETCH_SCHEDULE_SUCCESS, payload })
-const fetchScheduleFailure = payload => ({ type: FETCH_SCHEDULE_FAILURE, payload })
+const fetchScheduleRequest = () => ({ type: types.FETCH_SCHEDULE_REQUEST })
+const fetchScheduleSuccess = payload => ({ type: types.FETCH_SCHEDULE_SUCCESS, payload })
+const fetchScheduleFailure = payload => ({ type: types.FETCH_SCHEDULE_FAILURE, payload })
 
 const fetchSchedule = ({ leagueName }) => {
   return async dispatch => {
@@ -34,7 +31,4 @@ const fetchSchedule = ({ leagueName }) => {
 
 export {
   fetchSchedule,
-  FETCH_SCHEDULE_REQUEST,
-  FETCH_SCHEDULE_SUCCESS,
-  FETCH_SCHEDULE_FAILURE,
 }

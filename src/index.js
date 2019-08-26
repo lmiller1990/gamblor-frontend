@@ -5,7 +5,9 @@ import { Provider } from 'react-redux'
 import AppContainer from './App'
 import * as serviceWorker from './serviceWorker'
 
+import { fetchPastGamesForTeam } from './store/pastGames/actions'
 import { configureStore } from './store'
+window.fetchPastGamesForTeam = fetchPastGamesForTeam
 
 const store = configureStore()
 

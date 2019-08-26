@@ -3,12 +3,14 @@ import thunk from 'redux-thunk'
 
 import { gamesReducer } from './games/reducer'
 import { leagues } from './leagues/reducer'
+import { pastGames } from './pastGames/reducer'
 import { recommendations } from './recommendations/reducer'
 import { teams } from './teams/reducer'
 
 const rootReducer = combineReducers({
   games: gamesReducer,
   leagues,
+  pastGames,
   recommendations,
   teams,
 })
