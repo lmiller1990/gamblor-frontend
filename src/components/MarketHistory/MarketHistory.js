@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-function MarketHistory() {
+function MarketHistory({ teamId, fetchPastGamesForTeam }) {
+  useEffect(() => {
+    console.log('fetching for', teamId)
+  }, [teamId, fetchPastGamesForTeam])
+
   return (
     <div>
       Historty!!

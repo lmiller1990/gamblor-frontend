@@ -1,10 +1,13 @@
 import React from 'react'
 
-function BetRecommendations({ recommendations, allTeams }) {
+function BetRecommendations({ recommendations, allTeams, history }) {
   const recommendation = (rec, side) => {
     if (side === 'blue') {
       return (
-        <tr key={rec.id}>
+        <tr 
+          key={rec.id}
+          onClick={() => history.push(`/?blue=${rec.blueSideTeamId}&red=${rec.redSideTeamId}`)}
+        >
           <td>{rec.date}</td>
           <td>{allTeams[rec.blueSideTeamId].name}</td>
           <td>{allTeams[rec.redSideTeamId].name}</td>
@@ -18,7 +21,10 @@ function BetRecommendations({ recommendations, allTeams }) {
     }
 
     return (
-      <tr key={rec.id}>
+      <tr 
+        key={rec.id}
+        onClick={() => history.push(`/?blue=${rec.blueSideTeamId}&red=${rec.redSideTeamId}`)}
+      >
         <td>{rec.date}</td>
         <td>{allTeams[rec.redSideTeamId].name}</td>
         <td>{allTeams[rec.blueSideTeamId].name}</td>

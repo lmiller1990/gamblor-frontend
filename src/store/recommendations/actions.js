@@ -21,7 +21,6 @@ const fetchRecommendations = ({ gameIds }) => {
         ]
       })
 
-      console.log(data)
       dispatch(fetchRecommendationsSuccess(data))
     } catch (e) {
       dispatch(fetchRecommendationsFailure(e.message))

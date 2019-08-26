@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { parse } from 'query-string'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
@@ -9,10 +11,24 @@ import { BetRecommendationsContainer } from './components/BetRecommendations'
 import { MarketLineGraphContainer } from './components/MarketLineGraph'
 import { MarketHistoryContainer } from './components/MarketHistory'
 
-function App({ fetchTeams }) {
+
+function App({ fetchTeams, location }) {
+  const [currentTeamIds, setCurrentTeamIds] = useState({ blueId: undefined, redId: undefined })
+
   useEffect(() => {
     fetchTeams()
   }, [fetchTeams])
+
+
+  useEffect(() => {
+    const { red, blue } = parse(location.search)
+    if (red && blue) {
+      const blueId = parseInt(blue, 10)
+      const redId = parseInt(red, 10)
+      setCurrentTeamIds({ blueId, redId })
+    }
+
+  }, [location, setCurrentTeamIds])
 
   return (
     <>
@@ -24,10 +40,14 @@ function App({ fetchTeams }) {
 
           <Row>
             <Col>
-              <MarketHistoryContainer />
+              <MarketHistoryContainer
+                teamId={currentTeamIds.blueId}
+              />
             </Col>
             <Col>
-              <MarketHistoryContainer />
+              <MarketHistoryContainer 
+                teamId={currentTeamIds.redId}
+              />
             </Col>
           </Row>
         </Col>
@@ -52,6 +72,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const AppContainer = connect(null, mapDispatchToProps)(App)
+const AppContainer = withRouter(connect(null, mapDispatchToProps)(App))
 
 export default AppContainer;

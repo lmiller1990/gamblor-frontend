@@ -3,7 +3,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 import { UpcomingGamesContainer } from './components/UpcomingGames'
 
-function Schedule({ fetchSchedule, fetchLeagues, leagues }) {
+function Schedule({ fetchSchedule, fetchLeagues, leagues  }) {
   const [selectedLeagueName, setSelectedLeagueName] = useState()
   const [selectedLeagueId, setSelectedLeagueId] = useState()
 
