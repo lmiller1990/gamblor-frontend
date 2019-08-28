@@ -6,7 +6,7 @@ function BetRecommendations({ recommendations, allTeams, history }) {
       return (
         <tr 
           key={rec.id}
-          onClick={() => history.push(`/?blue=${rec.blueSideTeamId}&red=${rec.redSideTeamId}`)}
+          onClick={() => history.push(`/?market=${rec.market}&blue=${rec.blueSideTeamId}&red=${rec.redSideTeamId}`)}
         >
           <td>{rec.date}</td>
           <td>{allTeams[rec.blueSideTeamId].name}</td>
@@ -23,7 +23,7 @@ function BetRecommendations({ recommendations, allTeams, history }) {
     return (
       <tr 
         key={rec.id}
-        onClick={() => history.push(`/?blue=${rec.blueSideTeamId}&red=${rec.redSideTeamId}`)}
+        onClick={() => history.push(`/?market=${rec.market}&blue=${rec.blueSideTeamId}&red=${rec.redSideTeamId}`)}
       >
         <td>{rec.date}</td>
         <td>{allTeams[rec.redSideTeamId].name}</td>
