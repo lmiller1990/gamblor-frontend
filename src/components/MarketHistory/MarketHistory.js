@@ -3,11 +3,6 @@ import { parse } from 'query-string'
 import moment from 'moment'
 import Table from 'react-bootstrap/Table'
 
-const MarketResult = success => 
-  <span style={{ fontWeight: success ? 'bold' : '' }}>
-    {success ? '✓' : '✘'}
-  </span>
-
 function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, location }) {
   useEffect(() => {
     if (!teamId) {
@@ -17,37 +12,53 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
     fetchPastGamesForTeam(teamId)
   }, [teamId, fetchPastGamesForTeam])
 
+  const marketResult = success => {
+    return (
+      <td 
+        className='d-flex justify-content-center'
+        style={{ backgroundColor: success ? 'cornflowerblue' : 'red' }}
+      >
+        <span style={{ fontWeight: success ? 'bold' : '' }}>
+          {success ? '✓' : '✘'}
+        </span>
+      </td>
+    )
+  }
+
   const row = game => {
     const { market } = parse(location.search)
     const opponent = allTeams[game.opponentId].name
-    const date = moment(game.date).format('MMM YY')
+    const date = moment(game.date).format("MMM Do 'YY")
+    const success = game[market]
 
     return (
       <tr key={game.gameId}>
         <td>{date}</td>
-        <td>{opponent}</td>
-        <td>{MarketResult(game[market])}</td>
+        <td>{opponent} ({game.gameNumber})</td>
+        {marketResult(success)}
       </tr>
     )
   }
 
-    console.log(results)
   return (
     <div>
-      <Table size='sm'>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Vs</th>
-            <th>Result</th>
-          </tr>
-        </thead>
+      <h5>{allTeams[teamId] && allTeams[teamId].name}</h5>
+      <small>
+        <Table size='sm'>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Vs</th>
+              <th>Result</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {results.map(row)}
-        </tbody>
+          <tbody>
+            {results.map(row)}
+          </tbody>
 
-      </Table>
+        </Table>
+      </small>
     </div>
   )
 }

@@ -35,7 +35,12 @@ function App({ fetchTeams, location }) {
       <Row>
         <Col>
           <Row>
-            <MarketLineGraphContainer />
+            <Col>
+              <MarketLineGraphContainer 
+                redId={currentTeamIds.redId}
+                blueId={currentTeamIds.blueId}
+              />
+            </Col>
           </Row>
 
           <Row>
