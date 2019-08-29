@@ -31,10 +31,11 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
     const date = moment(game.date).format("MMM Do 'YY")
     const success = game[market]
 
+    const key = `${game.gameId}-${game.gameNumber}-${game.teamId}`
     return (
-      <tr key={game.gameId}>
+      <tr key={key}>
         <td>{date}</td>
-        <td>{opponent} ({game.gameNumber})</td>
+        <td>{opponent} ({game.gameNumber}) {key}</td>
         {marketResult(success)}
       </tr>
     )
@@ -42,13 +43,13 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
 
   return (
     <div>
-      <h5>{allTeams[teamId] && allTeams[teamId].name}</h5>
+      <h5>{allTeams[teamId].name}</h5>
       <small>
         <Table size='sm'>
           <thead>
             <tr>
               <th>Date</th>
-              <th>Vs</th>
+              <th>Opponent</th>
               <th>Result</th>
             </tr>
           </thead>

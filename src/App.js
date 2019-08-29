@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { parse } from 'query-string'
+import { isLoaded } from 'flux-entities'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Row from 'react-bootstrap/Row'
@@ -12,7 +13,7 @@ import { MarketLineGraphContainer } from './components/MarketLineGraph'
 import { MarketHistoryContainer } from './components/MarketHistory'
 
 
-function App({ fetchTeams, location }) {
+function App({ fetchTeams, location, isLoaded }) {
   const [currentTeamIds, setCurrentTeamIds] = useState({ blueId: undefined, redId: undefined })
 
   useEffect(() => {
@@ -30,45 +31,59 @@ function App({ fetchTeams, location }) {
 
   }, [location, setCurrentTeamIds])
 
-  return (
-    <>
-      <Row>
-        <Col>
-          <Row>
-            <Col>
-              <MarketLineGraphContainer 
-                redId={currentTeamIds.redId}
-                blueId={currentTeamIds.blueId}
-              />
-            </Col>
-          </Row>
+  const content = () => {
+    if (!isLoaded || !currentTeamIds.blueId || !currentTeamIds.redId) {
+      return <span />
+    }
 
-          <Row>
-            <Col>
-              <MarketHistoryContainer
-                teamId={currentTeamIds.blueId}
-              />
-            </Col>
-            <Col>
-              <MarketHistoryContainer 
-                teamId={currentTeamIds.redId}
-              />
-            </Col>
-          </Row>
-        </Col>
+    return (
+      <>
+        <Row>
+          <Col>
+            <Row>
+              <Col>
+                <MarketLineGraphContainer 
+                  redId={currentTeamIds.redId}
+                  blueId={currentTeamIds.blueId}
+                />
+              </Col>
+            </Row>
 
-        <Col>
-          <Row>
-            <ScheduleContainer />
-          </Row>
+            <Row>
+              <Col>
+                <MarketHistoryContainer
+                  teamId={currentTeamIds.blueId}
+                />
+              </Col>
+              <Col>
+                <MarketHistoryContainer 
+                  teamId={currentTeamIds.redId}
+                />
+              </Col>
+            </Row>
+          </Col>
 
-          <Row>
-            <BetRecommendationsContainer />
-          </Row>
-        </Col>
-      </Row>
-    </>
-  )
+          <Col>
+            <Row>
+              <ScheduleContainer />
+            </Row>
+
+            <Row>
+              <BetRecommendationsContainer />
+            </Row>
+          </Col>
+        </Row>
+      </>
+    )
+  }
+
+  return content()
+}
+
+const mapStateToProps = state => {
+  return {
+    isLoaded: isLoaded(state.teams)
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -77,6 +92,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const AppContainer = withRouter(connect(null, mapDispatchToProps)(App))
+const AppContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
 
 export default AppContainer;

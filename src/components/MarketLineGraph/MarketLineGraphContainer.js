@@ -6,9 +6,11 @@ import { MarketLineGraph } from './MarketLineGraph'
 
 const mapStateToProps = state => {
   const pastGames = mapEntities(state.pastGames)
+  const allTeams = state.teams.all
 
   return {
-    pastGames
+    pastGames,
+    allTeams,
   }
 }
 

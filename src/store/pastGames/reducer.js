@@ -22,11 +22,15 @@ const pastGames = (state = initialState, action) => {
   }
 
   if (action.type === types.FETCH_PAST_GAMES_FOR_TEAM_SUCCESS) {
-    // add on top of existing games in state
+    // since two teams will share a past game, the key will not be unique
+    // so, we save the key as teamId | gameId
+    // eg say C9 is id = 3 and TL is id 4, and we have a game C9 vs TL with gameId 10
+    // we save the game twice, once with key 3|10 and once with 4|10
     const newState = action.payload.reduce((acc, curr) => {
+      const id = `${curr.teamId}|${curr.gameId}` 
       return {
-        ids: [ ...acc.ids, curr.gameId ],
-        all: { ...acc.all, [curr.gameId]: curr }
+        ids: [ ...acc.ids, id],
+        all: { ...acc.all, [id]: curr }
       }
     }, { ids: [...state.ids], all: {...state.all} })
 

@@ -4,40 +4,54 @@ import { parse } from 'query-string'
 import round from 'lodash/round'
 import sortBy from 'lodash/sortBy'
 
-const data = (xAxisLabels, blueTeamData, redTeamData) => ({
-  labels: xAxisLabels,
-  datasets: [
-    {
-      label: 'blue side',
-      fill: false,
-      backgroundColor: 'blue',
-      borderColor: 'blue',
-      data: blueTeamData,
-    },
-    {
-      label: 'red side',
-      fill: false,
-      backgroundColor: 'red',
-      borderColor: 'red',
-      data: redTeamData,
-    }
-  ]
-})
+import { shortMarketToFullName } from '../../utils/mappers'
 
-function MarketLineGraph({ redId, blueId, location, pastGames }) {
+const getData = (blueTeamDataset, redTeamDataset) => {
+  const xAxisLabels = []
+  for (let i = 0; i < Math.max(blueTeamDataset.data.length, redTeamDataset.data.length); i++) {
+    xAxisLabels.push(i + 1);
+  }
+
+  return {
+    labels: xAxisLabels,
+    datasets: [
+      {
+        label: blueTeamDataset.teamName,
+        fill: false,
+        backgroundColor: 'blue',
+        borderColor: 'blue',
+        data: blueTeamDataset.data,
+      },
+      {
+        label: redTeamDataset.teamName,
+        fill: false,
+        backgroundColor: 'red',
+        borderColor: 'red',
+        data: redTeamDataset.data,
+      }
+    ]
+  }
+}
+
+const options = {
+  maintainAspectRatio: false,
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true,
+        suggestedMax: 100
+      }
+    }]
+  }
+}
+
+function MarketLineGraph({ redId, blueId, location, pastGames, allTeams }) {
   const { market } = parse(location.search)
   const gamesFor = teamId => pastGames.filter(x => x.teamId === teamId)
   const blueGames = sortBy(gamesFor(blueId), ['date', 'gameNumber'])
   const redGames = sortBy(gamesFor(redId), ['date', 'gameNumber'])
 
-  const xAxisLabels = []
-  console.log(blueGames, redGames)
-  for (let i = 0; i < Math.max(blueGames.length, redGames.length); i++) {
-    xAxisLabels.push(i + 1);
-  }
-
-  // side is 'red' or 'blue'
-  const getSuccessData = (side, teamId, games) => {
+  const getSuccessData = (teamId, games) => {
     const rates = []
     let wins = 0
     for (let i = 0; i < games.length; i++) {
@@ -51,20 +65,28 @@ function MarketLineGraph({ redId, blueId, location, pastGames }) {
     return rates.map(x => round(x * 100))
   }
 
-  const blueTeamData = [1,2,3]
-  const redTeamData = [2,5,3]
+  const blueTeamDataset = { 
+    teamName: allTeams[blueId].name,
+    data: getSuccessData(blueId, blueGames)
+  }
+  const redTeamDataset = { 
+    teamName: allTeams[redId].name,
+    data: getSuccessData(redId, redGames)
+  }
 
   return (
-    <div>
-      <Line 
-        data={
-          data(
-            xAxisLabels, 
-            getSuccessData('blue', blueId, blueGames), 
-            getSuccessData('red', redId, redGames), 
-          )
-        } />
+    <>
+      <div className='d-flex justify-content-center'>
+        <h5>Success Rate for {shortMarketToFullName(market)}</h5>
       </div>
+
+      <div style={{ height: '300px' }}>
+        <Line 
+          options={options}
+          data={getData(blueTeamDataset, redTeamDataset)} 
+        />
+      </div>
+    </>
   )
 }
 
