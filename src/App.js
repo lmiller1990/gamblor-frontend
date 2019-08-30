@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
 
 import { fetchTeams } from './store/teams/actions'
 import { ScheduleContainer } from './components/Schedule'
@@ -37,7 +38,7 @@ function App({ fetchTeams, location, isLoaded }) {
     }
 
     return (
-      <>
+      <Container fluid={true}>
         <Row>
           <Col>
             <Row>
@@ -73,7 +74,7 @@ function App({ fetchTeams, location, isLoaded }) {
             </Row>
           </Col>
         </Row>
-      </>
+      </Container>
     )
   }
 

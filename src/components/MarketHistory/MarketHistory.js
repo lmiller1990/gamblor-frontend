@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { parse } from 'query-string'
-import moment from 'moment'
 import Table from 'react-bootstrap/Table'
 
 import { formatDate } from '../../utils/date'
