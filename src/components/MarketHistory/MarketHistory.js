@@ -3,6 +3,8 @@ import { parse } from 'query-string'
 import moment from 'moment'
 import Table from 'react-bootstrap/Table'
 
+import { formatDate } from '../../utils/date'
+
 function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, location }) {
   useEffect(() => {
     if (!teamId) {
@@ -28,14 +30,14 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
   const row = game => {
     const { market } = parse(location.search)
     const opponent = allTeams[game.opponentId].name
-    const date = moment(game.date).format("MMM Do 'YY")
+    const date = formatDate(game.date)
     const success = game[market]
 
     const key = `${game.gameId}-${game.gameNumber}-${game.teamId}`
     return (
       <tr key={key}>
         <td>{date}</td>
-        <td>{opponent} ({game.gameNumber}) {key}</td>
+        <td>{opponent} ({game.gameNumber})</td>
         {marketResult(success)}
       </tr>
     )

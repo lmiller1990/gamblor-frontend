@@ -1,11 +1,10 @@
 import React from 'react'
-import moment from 'moment'
 import Table from 'react-bootstrap/Table'
 import sortBy from 'lodash/sortBy'
 
-function BetRecommendations({ recommendations, allTeams, history }) {
-  const formatDate = date => moment(date).format("MMM Do 'YY")
+import { formatDate } from '../../utils/date'
 
+function BetRecommendations({ recommendations, allTeams, history }) {
   const recommendation = (rec, side) => {
     if (side === 'blue') {
       return {

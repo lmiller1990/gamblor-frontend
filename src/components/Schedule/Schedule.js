@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
 
 import { UpcomingGamesContainer } from './components/UpcomingGames'
 
@@ -53,18 +55,15 @@ function Schedule({ fetchSchedule, fetchLeagues, leagues  }) {
   }
 
   return (
-    <div>
-      <div>
+    <Container>
+      <Row>
         {leagueSelect(leagues)}
-      </div>
+      </Row>
 
-      <div>
-        Games
-        <UpcomingGamesContainer
-          leagueId={selectedLeagueId}
-        />
-      </div>
-    </div>
+      <UpcomingGamesContainer
+        leagueId={selectedLeagueId}
+      />
+    </Container>
   )
 }
 

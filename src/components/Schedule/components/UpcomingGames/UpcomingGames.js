@@ -1,38 +1,39 @@
 import React from 'react'
-import moment from 'moment'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
+import { formatDate } from '../../../../utils/date'
 
 function UpcomingGames({ games, allTeams, fetchRecommendations }) {
   const showGame = game => {
+    const matchup = `${allTeams[game.blueSideTeamId].shortName.toUpperCase()} vs ${allTeams[game.redSideTeamId].shortName.toUpperCase()}`
+
     return (
-      <div 
-        className='d-flex justify-content-between'
-        key={game.id}
-      >
-        <div>
-          {moment(game.date).format('YYYY-MM-DD')}
+      <div key={game.id} className='d-flex'>
+        <div style={{ width: '120px' }}>
+          {formatDate(game.date)}
         </div>
 
         <div>
-          {allTeams[game.blueSideTeamId].name}
-        </div>
-
-        <div>
-          vs
-        </div>
-
-        <div>
-          {allTeams[game.redSideTeamId].name} 
+          {matchup}
         </div>
       </div>
     )
   }
 
+  const first5Games = games.slice(0, 5)
+  const remaining = games.slice(5)
+
   return (
-    <div>
-      {
-        games.map(showGame)
-      }
-    </div>
+    <Row>
+      <Col md={6}>
+        {first5Games.map(showGame)}
+      </Col>
+
+      <Col md={6}>
+        {remaining.map(showGame)}
+      </Col>
+    </Row>
   )
 }
 
