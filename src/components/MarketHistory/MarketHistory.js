@@ -42,6 +42,10 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
     )
   }
 
+  if (!teamId) {
+    return <span />
+  }
+
   return (
     <div>
       <h5>{allTeams[teamId].name}</h5>

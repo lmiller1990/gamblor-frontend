@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 
 import { formatDate } from '../../../../utils/date'
 
-function UpcomingGames({ games, allTeams, fetchRecommendations }) {
+function UpcomingGames({ games, allTeams }) {
   const showGame = game => {
     const matchup = `${allTeams[game.blueSideTeamId].shortName.toUpperCase()} vs ${allTeams[game.redSideTeamId].shortName.toUpperCase()}`
 

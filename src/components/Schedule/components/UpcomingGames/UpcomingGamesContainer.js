@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import { mapEntities } from 'flux-entities'
 
 import { UpcomingGames } from './UpcomingGames'
-import { fetchRecommendations } from '../../../../store/recommendations/actions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -11,12 +10,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchRecommendations: gameIds => dispatch(fetchRecommendations({ gameIds }))
-  }
-}
-
-const UpcomingGamesContainer = connect(mapStateToProps, mapDispatchToProps)(UpcomingGames)
+const UpcomingGamesContainer = connect(mapStateToProps)(UpcomingGames)
 
 export { UpcomingGamesContainer }

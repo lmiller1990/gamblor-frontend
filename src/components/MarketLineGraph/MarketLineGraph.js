@@ -51,6 +51,10 @@ function MarketLineGraph({ redId, blueId, location, pastGames, allTeams }) {
   const blueGames = sortBy(gamesFor(blueId), ['date', 'gameNumber'])
   const redGames = sortBy(gamesFor(redId), ['date', 'gameNumber'])
 
+  if (!redId || !blueId) {
+    return <></>
+  }
+
   const getSuccessData = (teamId, games) => {
     const rates = []
     let wins = 0

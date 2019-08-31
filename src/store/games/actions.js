@@ -8,11 +8,11 @@ const fetchScheduleRequest = () => ({ type: types.FETCH_SCHEDULE_REQUEST })
 const fetchScheduleSuccess = payload => ({ type: types.FETCH_SCHEDULE_SUCCESS, payload })
 const fetchScheduleFailure = payload => ({ type: types.FETCH_SCHEDULE_FAILURE, payload })
 
-const fetchSchedule = ({ leagueName }) => {
+const fetchSchedule = ({ leagueId }) => {
   return async dispatch => {
     try {
       dispatch(fetchScheduleRequest())
-      const { data } = await axios.get(`http://localhost:5000/schedule?league=${leagueName.replace(/ /g, '_')}`, {
+      const { data } = await axios.get(`http://localhost:5000/schedule?league=${leagueId}`, {
         transformResponse: [
           (data) => {
             return camelcaseKeys(JSON.parse(data), { deep: true })

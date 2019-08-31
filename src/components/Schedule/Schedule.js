@@ -2,30 +2,36 @@ import React, { useEffect, useState } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
+import { stringify, parse } from 'query-string'
 
 import { UpcomingGamesContainer } from './components/UpcomingGames'
 
-function Schedule({ fetchSchedule, fetchLeagues, leagues  }) {
-  const [selectedLeagueName, setSelectedLeagueName] = useState()
-  const [selectedLeagueId, setSelectedLeagueId] = useState()
+function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
+  const [currLeagueId, setCurrLeagueId] = useState()
 
-  useEffect(() => {
-    fetchLeagues()
-  }, [fetchLeagues])
-
-  const selectedLeague = () => {
-    if (selectedLeagueName) {
-      return selectedLeagueName
+  const selectedLeagueId = (location) => {
+    const { league } = parse(location.search)
+     
+    if (league) {
+      return parseInt(league, 10)
     }
-
-    return 'Select League'
   }
 
-  const leagueSelect = (leagues) => {
+  useEffect(() => {
+    const selectedId = selectedLeagueId(location)
+    if (selectedId && selectedId !== currLeagueId) {
+      fetchSchedule(selectedId)
+      setCurrLeagueId(selectedId)
+    }
+  }, [location, fetchSchedule, currLeagueId, setCurrLeagueId])
+
+  const leagueSelect = () => {
+    const text = currLeagueId ? allLeagues[currLeagueId].name : 'Select League'
+
     return (
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          {selectedLeague()}
+          {text}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
@@ -43,9 +49,9 @@ function Schedule({ fetchSchedule, fetchLeagues, leagues  }) {
         key={league.id}
         onClick={
           () => {
-            setSelectedLeagueName(league.name)
-            setSelectedLeagueId(league.id)
-            fetchSchedule(league.name)
+            fetchSchedule(league.id)
+            const qs = stringify({...parse(location.search), league: league.id })
+            history.push({ search: `?${qs}` })
           }
         }
       >
@@ -57,7 +63,7 @@ function Schedule({ fetchSchedule, fetchLeagues, leagues  }) {
   return (
     <Container>
       <Row>
-        {leagueSelect(leagues)}
+        {leagueSelect()}
       </Row>
 
       <UpcomingGamesContainer

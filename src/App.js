@@ -8,18 +8,23 @@ import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 
 import { fetchTeams } from './store/teams/actions'
+import { fetchLeagues } from './store/leagues/actions'
 import { ScheduleContainer } from './components/Schedule'
 import { BetRecommendationsContainer } from './components/BetRecommendations'
 import { MarketLineGraphContainer } from './components/MarketLineGraph'
 import { MarketHistoryContainer } from './components/MarketHistory'
 
 
-function App({ fetchTeams, location, isLoaded }) {
+function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
   const [currentTeamIds, setCurrentTeamIds] = useState({ blueId: undefined, redId: undefined })
 
   useEffect(() => {
     fetchTeams()
   }, [fetchTeams])
+
+  useEffect(() => {
+    fetchLeagues()
+  }, [fetchLeagues])
 
 
   useEffect(() => {
@@ -33,7 +38,7 @@ function App({ fetchTeams, location, isLoaded }) {
   }, [location, setCurrentTeamIds])
 
   const content = () => {
-    if (!isLoaded || !currentTeamIds.blueId || !currentTeamIds.redId) {
+    if (!isLoaded) {
       return <span />
     }
 
@@ -83,13 +88,15 @@ function App({ fetchTeams, location, isLoaded }) {
 
 const mapStateToProps = state => {
   return {
-    isLoaded: isLoaded(state.teams)
+    isLoaded: isLoaded(state.teams) && isLoaded(state.leagues),
+    teams: state.teams
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchTeams: () => dispatch(fetchTeams()),
+    fetchLeagues: () => dispatch(fetchLeagues()),
   }
 }
 
