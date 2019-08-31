@@ -29,8 +29,8 @@ const pastGames = (state = initialState, action) => {
     const newState = action.payload.reduce((acc, curr) => {
       const id = `${curr.teamId}|${curr.gameId}` 
       return {
-        ids: [ ...acc.ids, id],
-        all: { ...acc.all, [id]: curr }
+        ids: [...new Set([ ...acc.ids, id])],
+        all: { ...acc.all, [id]: {...curr, id} }
       }
     }, { ids: [...state.ids], all: {...state.all} })
 

@@ -3,6 +3,7 @@ import { parse } from 'query-string'
 import Table from 'react-bootstrap/Table'
 
 import { formatDate } from '../../utils/date'
+import './index.scss'
 
 function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, location }) {
   useEffect(() => {
@@ -14,11 +15,9 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
   }, [teamId, fetchPastGamesForTeam])
 
   const marketResult = success => {
+    const resultClass = success ? 'success' : 'failure'
     return (
-      <td 
-        className='d-flex justify-content-center'
-        style={{ backgroundColor: success ? 'cornflowerblue' : 'red' }}
-      >
+      <td className={`d-flex justify-content-center ${resultClass}`}>
         <span style={{ fontWeight: success ? 'bold' : '' }}>
           {success ? '✓' : '✘'}
         </span>
@@ -28,7 +27,7 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
 
   const row = game => {
     const { market } = parse(location.search)
-    const opponent = allTeams[game.opponentId].name
+    const opponent = allTeams[game.opponentId].shortName.toUpperCase()
     const date = formatDate(game.date)
     const success = game[market]
 

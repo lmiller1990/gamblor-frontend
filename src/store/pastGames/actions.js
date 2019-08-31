@@ -26,5 +26,5 @@ const fetchPastGamesForTeam = ({ teamId, n = 20 }) => {
 }
 
 export {
-  fetchPastGamesForTeam
+  fetchPastGamesForTeam,
 }

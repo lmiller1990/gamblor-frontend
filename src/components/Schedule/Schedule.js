@@ -67,7 +67,7 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
       </Row>
 
       <UpcomingGamesContainer
-        leagueId={selectedLeagueId}
+        leagueId={currLeagueId}
       />
     </Container>
   )
