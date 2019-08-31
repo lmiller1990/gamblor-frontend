@@ -1,18 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
+import { stringify, parse } from 'query-string'
 import Col from 'react-bootstrap/Col'
 import sortBy from 'lodash/sortBy'
 
 import { formatDate } from '../../utils/date'
 import './index.scss'
 
-function BetRecommendations({ recommendations, allTeams, history }) {
+function BetRecommendations({ recommendations, allTeams, history, location }) {
   const [minEv, setMinEv] = useState(1)
   const [minDiff, setMinDiff] = useState(10)
   const [selectedId, setId] = useState()
+
+  useEffect(() => {
+    const { betId } = parse(location.search)
+    if (betId) {
+      setId(betId)
+    }
+  }, [location, selectedId, setId])
 
   const trStyle = (selected) => {
     if (!selected) {
@@ -63,14 +71,15 @@ function BetRecommendations({ recommendations, allTeams, history }) {
   }
 
   const recommendationRow = rec => {
-    let param = `/?market=${rec.market}`
-    if (rec.side === 'blue') {
-      param += `&blue=${rec.teamId}&red=${rec.opponentId}`
-    } else {
-      param += `&blue=${rec.opponentId}&red=${rec.teamId}`
-    }
-    const key = `${rec.id}-${rec.teamId}`
-    
+    const betId = `${rec.id}-${rec.teamId}`
+    const qs = (() => {
+      if (rec.side === 'blue') {
+        return stringify({ 
+          ...parse(location.search), market: rec.market, blue: rec.teamId, red: rec.opponentId, betId })
+      }
+      return stringify({ ...parse(location.search), market: rec.market, blue: rec.opponentId, red: rec.teamId, betId })
+    })()
+
     const successDiff = (teamSuccess, oppSuccess) => {
       const diff = teamSuccess - oppSuccess
       if (diff > 0) {
@@ -81,14 +90,13 @@ function BetRecommendations({ recommendations, allTeams, history }) {
     }
 
     const uc = str => str.slice(0, 2).toUpperCase() + str.slice(2)
-
     const title = `${uc(rec.market)} - ${rec.team} vs ${rec.opponent}` 
 
     return (
       <tr 
-        key={key}
-        style={trStyle(key === selectedId)}
-        onClick={() => { history.push(param); setId(key) } }
+        key={betId}
+        style={trStyle(betId === selectedId)}
+        onClick={() => history.push({ search: qs })}
       >
         <td>{rec.date}</td>
         <td>{title}</td>
