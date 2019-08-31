@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import sortBy from 'lodash/sortBy'
 
 import { formatDate } from '../../utils/date'
+import './index.scss'
 
 function BetRecommendations({ recommendations, allTeams, history }) {
+  const trStyle = (selected) => {
+    if (!selected) {
+      return {}
+    }
+
+    return { backgroundColor: 'rgba(0,0,0,.075)' }
+  }
+  const [selectedId, setId] = useState()
+
   const recommendation = (rec, side) => {
     if (side === 'blue') {
       return {
@@ -46,11 +56,16 @@ function BetRecommendations({ recommendations, allTeams, history }) {
     } else {
       param += `&blue=${rec.opponentId}&red=${rec.teamId}`
     }
+    const key = `${rec.id}-${rec.teamId}`
 
     return (
       <tr 
-        key={`${rec.id}-${rec.teamId}`}
-        onClick={() => history.push(param)}
+        key={key}
+        style={trStyle(key === selectedId)}
+        onClick={() => {
+          history.push(param)
+          setId(key)
+        }}
       >
         <td>{rec.date}</td>
         <td>{rec.team}</td>
@@ -71,10 +86,10 @@ function BetRecommendations({ recommendations, allTeams, history }) {
     ],'ev').reverse()
 
   return (
-  <div>
+  <div id='recommendations-table'>
     <small>
 
-      <Table>
+      <Table hover>
         <thead>
           <tr>
             <th>Date</th>
