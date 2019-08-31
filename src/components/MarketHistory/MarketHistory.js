@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import Card from 'react-bootstrap/Card'
 import { parse } from 'query-string'
 import Table from 'react-bootstrap/Table'
 
@@ -48,7 +47,9 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
 
   return (
     <div>
-      <div>{allTeams[teamId].name}</div>
+      <div className='text-medium text-center pb-1'>
+        <u>{allTeams[teamId].name}</u>
+      </div>
       <small>
         <Table size='sm'>
           <thead>
