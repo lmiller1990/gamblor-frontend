@@ -1,4 +1,5 @@
 import React from 'react'
+import Card from 'react-bootstrap/Card'
 import { Line } from 'react-chartjs-2'
 import { parse } from 'query-string'
 import round from 'lodash/round'
@@ -79,7 +80,7 @@ function MarketLineGraph({ redId, blueId, location, pastGames, allTeams }) {
   }
 
   return (
-    <>
+    <Card>
       <div className='d-flex justify-content-center'>
         <h6>Success Rate for {shortMarketToFullName(market)}</h6>
       </div>
@@ -90,7 +91,7 @@ function MarketLineGraph({ redId, blueId, location, pastGames, allTeams }) {
           data={getData(blueTeamDataset, redTeamDataset)} 
         />
       </div>
-    </>
+    </Card>
   )
 }
 

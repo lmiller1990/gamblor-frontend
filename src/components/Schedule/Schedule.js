@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import { stringify, parse } from 'query-string'
 
@@ -68,12 +69,13 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
 
   return (
     <Container>
-      <h6 className='text-center'>Schedule</h6>
-      {filters}
-      <UpcomingGamesContainer
-        leagueId={currLeagueId}
-      />
-      <hr />
+      <Card>
+        <h6 className='text-center'>Schedule</h6>
+        {filters}
+        <UpcomingGamesContainer
+          leagueId={currLeagueId}
+        />
+      </Card>
     </Container>
   )
 }

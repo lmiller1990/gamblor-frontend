@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import sortBy from 'lodash/sortBy'
@@ -142,26 +143,28 @@ function BetRecommendations({ recommendations, allTeams, history }) {
 
   return (
     <Container id='recommendations-table'>
-      <h6 className='text-center'>Upcoming Market Data</h6>
-      {filters}
-      <small>
-        <Table hover>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Matchup</th>
-              <th>Odds</th>
-              <th>EV</th>
-              <th>Success</th>
-              <th>Opp. Success</th>
-            </tr>
-          </thead>
+      <Card>
+        <h6 className='text-center'>Upcoming Market Data</h6>
+        {filters}
+        <small>
+          <Table hover>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Matchup</th>
+                <th>Odds</th>
+                <th>EV</th>
+                <th>Success</th>
+                <th>Opp. Success</th>
+              </tr>
+            </thead>
 
-          <tbody>
-            {sortedRecommendations.map(recommendationRow)}
-          </tbody>
-        </Table>
-      </small>
+            <tbody>
+              {sortedRecommendations.map(recommendationRow)}
+            </tbody>
+          </Table>
+        </small>
+      </Card>
     </Container>
   )
 }

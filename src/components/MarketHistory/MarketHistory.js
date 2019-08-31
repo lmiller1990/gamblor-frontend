@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import Card from 'react-bootstrap/Card'
 import { parse } from 'query-string'
 import Table from 'react-bootstrap/Table'
 
@@ -17,7 +18,7 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
   const marketResult = success => {
     const resultClass = success ? 'success' : 'failure'
     return (
-      <td className={`d-flex justify-content-center ${resultClass}`}>
+      <td className={`text-center ${resultClass}`}>
         <span style={{ fontWeight: success ? 'bold' : '' }}>
           {success ? '✓' : '✘'}
         </span>
@@ -47,7 +48,7 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
 
   return (
     <div>
-      <h6>{allTeams[teamId].name}</h6>
+      <div>{allTeams[teamId].name}</div>
       <small>
         <Table size='sm'>
           <thead>

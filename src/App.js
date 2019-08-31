@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 
 import { fetchTeams } from './store/teams/actions'
@@ -55,20 +56,21 @@ function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
               </Col>
             </Row>
 
-            <hr/ >
-
-            <Row>
-              <Col>
-                <MarketHistoryContainer
-                  teamId={currentTeamIds.blueId}
-                />
-              </Col>
-              <Col>
-                <MarketHistoryContainer 
-                  teamId={currentTeamIds.redId}
-                />
-              </Col>
-            </Row>
+            <Card>
+              <h6 className='text-center'>Past Games</h6>
+              <Row>
+                <Col>
+                  <MarketHistoryContainer
+                    teamId={currentTeamIds.blueId}
+                  />
+                </Col>
+                <Col>
+                  <MarketHistoryContainer 
+                    teamId={currentTeamIds.redId}
+                  />
+                </Col>
+              </Row>
+            </Card>
           </Col>
 
           <Col>
