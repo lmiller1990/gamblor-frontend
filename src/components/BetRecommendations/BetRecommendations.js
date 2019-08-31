@@ -120,7 +120,7 @@ function BetRecommendations({ recommendations, allTeams, history, location }) {
         <Form.Control 
           size='sm'
           value={minEv ? minEv : ''}
-          onChange={e => setMinEv(parseFloat(e.target.value))}
+          onChange={e => setMinEv(e.target.value)}
         />
       </Form.Group>
 
@@ -131,7 +131,7 @@ function BetRecommendations({ recommendations, allTeams, history, location }) {
         <Form.Control 
           size='sm'
           value={minDiff ? minDiff : ''}
-          onChange={e => setMinDiff(parseFloat(e.target.value))}
+          onChange={e => setMinDiff(e.target.value)}
         />
       </Form.Group>
     </Form.Row>
@@ -144,10 +144,11 @@ function BetRecommendations({ recommendations, allTeams, history, location }) {
 
   const sortedRecommendations = sortBy(allRecommdations, 'ev')
     .filter(x => {
-      if (!minEv || !minDiff) {
+      const [ev, diff] = [minEv, minDiff].map(parseFloat)
+      if (!ev || !diff) {
         return x
       }
-      return x.ev > minEv && ((x.teamSuccess - x.opponentSuccess) > minDiff)
+      return x.ev > ev && (x.teamSuccess - x.opponentSuccess) > diff
     })
     .reverse()
 
