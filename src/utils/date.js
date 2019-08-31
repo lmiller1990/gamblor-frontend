@@ -5,7 +5,13 @@ import moment from 'moment'
  * @param {string} date to format
  * @returns {string} formatted ddate
  */
-const formatDate = date => moment(date).format("MMM Do 'YY")
+const formatDate = (date, { showYear } = { showYear: true }) => {
+  if (showYear) {
+    return moment(date).format("MMM Do 'YY")
+  }
+
+  return moment(date).format("MMM Do")
+}
 
 export {
   formatDate

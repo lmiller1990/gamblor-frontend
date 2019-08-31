@@ -20,7 +20,7 @@ function BetRecommendations({ recommendations, allTeams, history }) {
       return {
         id: rec.id,
         side: 'blue',
-        date: formatDate(rec.date),
+        date: formatDate(rec.date, { showYear: false }),
         team: allTeams[rec.blueSideTeamId].shortName.toUpperCase(),
         teamId: rec.blueSideTeamId,
         opponent: allTeams[rec.redSideTeamId].shortName.toUpperCase(),
@@ -36,7 +36,7 @@ function BetRecommendations({ recommendations, allTeams, history }) {
     return {
       id: rec.id,
       side: 'red',
-      date: formatDate(rec.date),
+      date: formatDate(rec.date, { showYear: false }),
       team: allTeams[rec.redSideTeamId].shortName.toUpperCase(),
       teamId: rec.redSideTeamId,
       opponent: allTeams[rec.blueSideTeamId].shortName.toUpperCase(),

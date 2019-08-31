@@ -43,7 +43,7 @@ function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
     }
 
     return (
-      <Container fluid={true}>
+      <Container>
         <Row>
           <Col>
             <Row>
