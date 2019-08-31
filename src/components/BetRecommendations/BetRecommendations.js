@@ -69,6 +69,15 @@ function BetRecommendations({ recommendations, allTeams, history }) {
       param += `&blue=${rec.opponentId}&red=${rec.teamId}`
     }
     const key = `${rec.id}-${rec.teamId}`
+    
+    const successDiff = (teamSuccess, oppSuccess) => {
+      const diff = teamSuccess - oppSuccess
+      if (diff > 0) {
+        return <span className='text-success'>{' '}(+{diff.toFixed(0)}%) </span>
+      }
+
+      return <span className='text-danger'>{' '}({diff.toFixed(0)}%)</span>
+    }
 
     return (
       <tr 
@@ -85,8 +94,11 @@ function BetRecommendations({ recommendations, allTeams, history }) {
         <td>{rec.market}</td>
         <td>{rec.odds}</td>
         <td>{rec.ev}</td>
-        <td>{rec.teamSuccess.toFixed(2)}</td>
-        <td>{rec.opponentSuccess.toFixed(2)}</td>
+        <td>
+          {rec.teamSuccess.toFixed(0)}%
+          {successDiff(rec.teamSuccess, rec.opponentSuccess)}
+        </td>
+        <td>{rec.opponentSuccess.toFixed(0)}%</td>
       </tr>
     )
   }
@@ -140,8 +152,8 @@ function BetRecommendations({ recommendations, allTeams, history }) {
               <th>Market</th>
               <th>Odds</th>
               <th>EV</th>
-              <th>Success (%)</th>
-              <th>Opp. Success (%)</th>
+              <th>Success</th>
+              <th>Opp. Success</th>
             </tr>
           </thead>
 
