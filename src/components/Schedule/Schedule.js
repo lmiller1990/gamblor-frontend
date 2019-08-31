@@ -30,7 +30,11 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
 
     return (
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle 
+          size='sm' 
+          variant='outline-dark' 
+          id='dropdown-basic'
+        >
           {text}
         </Dropdown.Toggle>
 
@@ -47,6 +51,7 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
     return (
       <Dropdown.Item 
         key={league.id}
+        size='sm'
         onClick={
           () => {
             fetchSchedule(league.id)
@@ -55,7 +60,9 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
           }
         }
       >
-        {league.name}
+        <small>
+          {league.name}
+        </small>
       </Dropdown.Item>
     )
   }
