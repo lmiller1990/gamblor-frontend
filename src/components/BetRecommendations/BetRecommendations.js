@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import Table from 'react-bootstrap/Table'
+import Form from 'react-bootstrap/Form'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
 import sortBy from 'lodash/sortBy'
 
 import { formatDate } from '../../utils/date'
 import './index.scss'
 
 function BetRecommendations({ recommendations, allTeams, history }) {
+  const [minEv, setMinEv] = useState(1)
+  const [minDiff, setMinDiff] = useState(10)
+
   const trStyle = (selected) => {
     if (!selected) {
       return {}
@@ -31,8 +37,8 @@ function BetRecommendations({ recommendations, allTeams, history }) {
         market: rec.market,
         odds: rec.blueOdds.toFixed(2),
         ev: rec.blueEv.toFixed(2),
-        teamSuccess: rec.blueSuccess.toFixed(2),
-        opponentSuccess: rec.redSuccess.toFixed(2)
+        teamSuccess: rec.blueSuccess * 100,
+        opponentSuccess: rec.redSuccess * 100
       }
     }
 
@@ -50,8 +56,8 @@ function BetRecommendations({ recommendations, allTeams, history }) {
       market: rec.market,
       odds: rec.redOdds.toFixed(2),
       ev: rec.redEv.toFixed(2),
-      teamSuccess: rec.redSuccess.toFixed(2),
-      opponentSuccess: rec.blueSuccess.toFixed(2)
+      teamSuccess: rec.redSuccess * 100,
+      opponentSuccess: rec.blueSuccess * 100
     }
   }
 
@@ -79,43 +85,72 @@ function BetRecommendations({ recommendations, allTeams, history }) {
         <td>{rec.market}</td>
         <td>{rec.odds}</td>
         <td>{rec.ev}</td>
-        <td>{rec.teamSuccess}</td>
-        <td>{rec.opponentSuccess}</td>
+        <td>{rec.teamSuccess.toFixed(2)}</td>
+        <td>{rec.opponentSuccess.toFixed(2)}</td>
       </tr>
     )
   }
 
-  const sortedRecommendations = sortBy(
-    [
+  const filters = (
+    <Form.Row>
+      <Form.Group as={Col} controlId='filter-min-ev'>
+        <Form.Label>Min EV</Form.Label>
+        <Form.Control 
+          size='sm'
+          value={minEv ? minEv : ''}
+          onChange={e => setMinEv(parseFloat(e.target.value))}
+        />
+      </Form.Group>
+
+      <Form.Group as={Col} controlId='filter-diff'>
+        <Form.Label>Min Diff</Form.Label>
+        <Form.Control 
+          size='sm'
+          value={minDiff ? minDiff : ''}
+          onChange={e => setMinDiff(parseFloat(e.target.value))}
+        />
+      </Form.Group>
+    </Form.Row>
+  )
+
+  const allRecommdations = [
       ...recommendations.map(x => recommendation(x, 'blue')),
       ...recommendations.map(x => recommendation(x, 'red'))
-    ],'ev').reverse()
+  ]
+
+  const sortedRecommendations = sortBy(allRecommdations, 'ev')
+    .filter(x => {
+      if (!minEv || !minDiff) {
+        return x
+      }
+      return x.ev > minEv && ((x.teamSuccess - x.opponentSuccess) > minDiff)
+    })
+    .reverse()
 
   return (
-  <div id='recommendations-table'>
-    <small>
+    <Container id='recommendations-table'>
+      {filters}
+      <small>
+        <Table hover>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Team</th>
+              <th>Opp.</th>
+              <th>Market</th>
+              <th>Odds</th>
+              <th>EV</th>
+              <th>Success (%)</th>
+              <th>Opp. Success (%)</th>
+            </tr>
+          </thead>
 
-      <Table hover>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Team</th>
-            <th>Opp.</th>
-            <th>Market</th>
-            <th>Odds</th>
-            <th>EV</th>
-            <th>Success</th>
-            <th>Opp. Success</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {sortedRecommendations.map(recommendationRow)}
-        </tbody>
-      </Table>
-
-    </small>
-  </div>
+          <tbody>
+            {sortedRecommendations.map(recommendationRow)}
+          </tbody>
+        </Table>
+      </small>
+    </Container>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Dropdown from 'react-bootstrap/Dropdown'
-import Row from 'react-bootstrap/Row'
+import Form from 'react-bootstrap/Form'
+import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import { stringify, parse } from 'query-string'
 
@@ -25,57 +25,53 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
     }
   }, [location, fetchSchedule, currLeagueId, setCurrLeagueId])
 
-  const leagueSelect = () => {
-    const text = currLeagueId ? allLeagues[currLeagueId].name : 'Select League'
-
-    return (
-      <Dropdown>
-        <Dropdown.Toggle 
-          size='sm' 
-          variant='outline-dark' 
-          id='dropdown-basic'
-        >
-          {text}
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          {
-            leagues.map(league => leagueOption(league, fetchSchedule))
-          }
-        </Dropdown.Menu>
-      </Dropdown>
-    )
-  }
-
   const leagueOption = (league, fetchSchedule) => {
     return (
-      <Dropdown.Item 
+      <option
         key={league.id}
         size='sm'
-        onClick={
-          () => {
-            fetchSchedule(league.id)
-            const qs = stringify({...parse(location.search), league: league.id })
-            history.push({ search: `?${qs}` })
-          }
-        }
+        value={league.id}
       >
-        <small>
-          {league.name}
-        </small>
-      </Dropdown.Item>
+        {league.name}
+      </option>
     )
   }
+
+  const handleSelectChange = e => {
+    const league = parseInt(e.target.value)
+    if (!league) {
+      return
+    }
+    fetchSchedule(league)
+    const qs = stringify({...parse(location.search), league })
+    history.push({ search: `?${qs}` })
+  }
+
+  const filters = (
+    <Form.Row>
+      <Form.Group as={Col} sm='6' controlId='filter-league'>
+        <Form.Label>League</Form.Label>
+        <Form.Control 
+          as='select'
+          size='sm'
+          onChange={handleSelectChange}
+        >
+          <option>
+            Select League
+          </option>
+          {leagues.map(league => leagueOption(league, fetchSchedule))}
+        </Form.Control>
+      </Form.Group>
+    </Form.Row>
+  )
 
   return (
     <Container>
-      <Row>
-        {leagueSelect()}
-      </Row>
-
+      {filters}
       <UpcomingGamesContainer
         leagueId={currLeagueId}
       />
+      <hr />
     </Container>
   )
 }
