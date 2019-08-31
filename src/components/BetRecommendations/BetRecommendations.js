@@ -11,6 +11,7 @@ import './index.scss'
 function BetRecommendations({ recommendations, allTeams, history }) {
   const [minEv, setMinEv] = useState(1)
   const [minDiff, setMinDiff] = useState(10)
+  const [selectedId, setId] = useState()
 
   const trStyle = (selected) => {
     if (!selected) {
@@ -19,7 +20,6 @@ function BetRecommendations({ recommendations, allTeams, history }) {
 
     return { backgroundColor: 'rgba(0,0,0,.075)' }
   }
-  const [selectedId, setId] = useState()
 
   const recommendation = (rec, side) => {
     if (side === 'blue') {
@@ -79,19 +79,21 @@ function BetRecommendations({ recommendations, allTeams, history }) {
       return <span className='text-danger'>{' '}({diff.toFixed(0)}%)</span>
     }
 
+    const title = `${rec.market.toUpperCase()} - ${rec.team} vs ${rec.opponent}` 
+
     return (
       <tr 
         key={key}
         style={trStyle(key === selectedId)}
-        onClick={() => {
-          history.push(param)
-          setId(key)
-        }}
+        onClick={() => { history.push(param); setId(key) } }
       >
         <td>{rec.date}</td>
+        <td>{title}</td>
+        {/*
         <td>{rec.team}</td>
         <td>{rec.opponent}</td>
         <td>{rec.market}</td>
+        */}
         <td>{rec.odds}</td>
         <td>{rec.ev}</td>
         <td>
@@ -106,7 +108,9 @@ function BetRecommendations({ recommendations, allTeams, history }) {
   const filters = (
     <Form.Row>
       <Form.Group as={Col} controlId='filter-min-ev'>
-        <Form.Label>Min EV</Form.Label>
+        <Form.Label>
+          <small>Min EV</small>
+        </Form.Label>
         <Form.Control 
           size='sm'
           value={minEv ? minEv : ''}
@@ -115,7 +119,9 @@ function BetRecommendations({ recommendations, allTeams, history }) {
       </Form.Group>
 
       <Form.Group as={Col} controlId='filter-diff'>
-        <Form.Label>Min Diff</Form.Label>
+        <Form.Label>
+          <small>Min Success Diff (%)</small>
+        </Form.Label>
         <Form.Control 
           size='sm'
           value={minDiff ? minDiff : ''}
@@ -141,15 +147,14 @@ function BetRecommendations({ recommendations, allTeams, history }) {
 
   return (
     <Container id='recommendations-table'>
+      <h6 className='text-center'>Upcoming Market Data</h6>
       {filters}
       <small>
         <Table hover>
           <thead>
             <tr>
               <th>Date</th>
-              <th>Team</th>
-              <th>Opp.</th>
-              <th>Market</th>
+              <th>Matchup</th>
               <th>Odds</th>
               <th>EV</th>
               <th>Success</th>

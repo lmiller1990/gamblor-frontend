@@ -43,7 +43,7 @@ function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
     }
 
     return (
-      <Container>
+      <Container className='p-1'>
         <Row>
           <Col>
             <Row>
@@ -54,6 +54,8 @@ function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
                 />
               </Col>
             </Row>
+
+            <hr/ >
 
             <Row>
               <Col>

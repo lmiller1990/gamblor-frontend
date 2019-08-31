@@ -55,6 +55,7 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
           as='select'
           size='sm'
           onChange={handleSelectChange}
+          value={currLeagueId}
         >
           <option>
             Select League
@@ -67,6 +68,7 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
 
   return (
     <Container>
+      <h6 className='text-center'>Schedule</h6>
       {filters}
       <UpcomingGamesContainer
         leagueId={currLeagueId}

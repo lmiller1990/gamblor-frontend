@@ -18,15 +18,15 @@ const getData = (blueTeamDataset, redTeamDataset) => {
       {
         label: blueTeamDataset.teamName,
         fill: false,
-        backgroundColor: 'blue',
-        borderColor: 'blue',
+        backgroundColor: 'lightblue',
+        borderColor: 'lightblue',
         data: blueTeamDataset.data,
       },
       {
         label: redTeamDataset.teamName,
         fill: false,
-        backgroundColor: 'red',
-        borderColor: 'red',
+        backgroundColor: 'rgba(255, 0, 0, 0.6)',
+        borderColor: 'rgba(255, 0, 0, 0.6)',
         data: redTeamDataset.data,
       }
     ]
@@ -81,7 +81,7 @@ function MarketLineGraph({ redId, blueId, location, pastGames, allTeams }) {
   return (
     <>
       <div className='d-flex justify-content-center'>
-        <h5>Success Rate for {shortMarketToFullName(market)}</h5>
+        <h6>Success Rate for {shortMarketToFullName(market)}</h6>
       </div>
 
       <div style={{ height: '300px' }}>

@@ -47,7 +47,7 @@ function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, locat
 
   return (
     <div>
-      <h5>{allTeams[teamId].name}</h5>
+      <h6>{allTeams[teamId].name}</h6>
       <small>
         <Table size='sm'>
           <thead>

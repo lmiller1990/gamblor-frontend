@@ -4,9 +4,9 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import AppContainer from './App'
-
 import { configureStore } from './store'
 import { ROOT_URL } from './routing/frontend'
+import './index.css'
 
 const store = configureStore()
 
