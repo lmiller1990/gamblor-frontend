@@ -89,11 +89,6 @@ function BetRecommendations({ recommendations, allTeams, history }) {
       >
         <td>{rec.date}</td>
         <td>{title}</td>
-        {/*
-        <td>{rec.team}</td>
-        <td>{rec.opponent}</td>
-        <td>{rec.market}</td>
-        */}
         <td>{rec.odds}</td>
         <td>{rec.ev}</td>
         <td>
