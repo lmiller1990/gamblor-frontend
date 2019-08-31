@@ -9,7 +9,10 @@ function UpcomingGames({ games, allTeams }) {
     const matchup = `${allTeams[game.blueSideTeamId].shortName.toUpperCase()} vs ${allTeams[game.redSideTeamId].shortName.toUpperCase()}`
 
     return (
-      <small key={game.id}>
+      <small 
+        className='text-medium'
+        key={game.id}
+      >
         <div className='d-flex'>
           <div style={{ width: '120px' }}>
             {formatDate(game.date)}

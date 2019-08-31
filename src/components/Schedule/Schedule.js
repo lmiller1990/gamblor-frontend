@@ -50,8 +50,9 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
 
   const filters = (
     <Form.Row>
-      <Form.Group as={Col} sm='6' controlId='filter-league'>
-        <Form.Label>League</Form.Label>
+      <Form.Group as={Col} sm='8' className='m-0' />
+
+      <Form.Group as={Col} sm='4' controlId='filter-league' className='m-0'>
         <Form.Control 
           as='select'
           size='sm'
@@ -72,6 +73,7 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
       <Card>
         <h6 className='text-center'>Schedule</h6>
         {filters}
+        <hr className='mt-2 mb-2' />
         <UpcomingGamesContainer
           leagueId={currLeagueId}
         />

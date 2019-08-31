@@ -80,7 +80,9 @@ function BetRecommendations({ recommendations, allTeams, history }) {
       return <span className='text-danger'>{' '}({diff.toFixed(0)}%)</span>
     }
 
-    const title = `${rec.market.toUpperCase()} - ${rec.team} vs ${rec.opponent}` 
+    const uc = str => str.slice(0, 2).toUpperCase() + str.slice(2)
+
+    const title = `${uc(rec.market)} - ${rec.team} vs ${rec.opponent}` 
 
     return (
       <tr 
