@@ -2,12 +2,13 @@ import axios from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 
 import * as types from './constants'
+import { N_GAMES } from '../../constants'
 
 const fetchPastGamesForTeamRequest = () => ({ type: types.FETCH_PAST_GAMES_FOR_TEAM_REQUEST })
 const fetchPastGamesForTeamSuccess = payload => ({ type: types.FETCH_PAST_GAMES_FOR_TEAM_SUCCESS, payload })
 const fetchPastGamesForTeamFailure = payload => ({ type: types.FETCH_PAST_GAMES_FOR_TEAM_FAILURE, payload })
 
-const fetchPastGamesForTeam = ({ teamId, n = 20 }) => {
+const fetchPastGamesForTeam = ({ teamId, n = N_GAMES }) => {
   return async dispatch => {
     try {
       dispatch(fetchPastGamesForTeamRequest())
