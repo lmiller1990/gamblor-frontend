@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 
 import { BetRecommendations } from './BetRecommendations'
 import { fetchRecommendations } from '../../store/recommendations/actions'
+import { setPastNGames } from '../../store/pastGames/actions'
 
 const mapStateToProps = state => {
   return {
@@ -17,7 +18,11 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchRecommendations: ({ gameIds, pastNGames }) => {
       dispatch(fetchRecommendations({ gameIds, pastNGames }))
-    }
+    },
+
+    setPastNGames: ({ nGames }) => {
+      dispatch(setPastNGames({ nGames }))
+    },
   }
 }
 

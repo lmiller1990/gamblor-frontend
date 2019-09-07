@@ -7,6 +7,7 @@ import { N_GAMES } from '../../constants'
 const fetchPastGamesForTeamRequest = () => ({ type: types.FETCH_PAST_GAMES_FOR_TEAM_REQUEST })
 const fetchPastGamesForTeamSuccess = payload => ({ type: types.FETCH_PAST_GAMES_FOR_TEAM_SUCCESS, payload })
 const fetchPastGamesForTeamFailure = payload => ({ type: types.FETCH_PAST_GAMES_FOR_TEAM_FAILURE, payload })
+const setPastNGames = ({ nGames }) => ({ type: types.SET_PAST_N_GAMES, payload: { nGames } })
 
 const fetchPastGamesForTeam = ({ teamId, n = N_GAMES }) => {
   return async dispatch => {
@@ -28,4 +29,5 @@ const fetchPastGamesForTeam = ({ teamId, n = N_GAMES }) => {
 
 export {
   fetchPastGamesForTeam,
+  setPastNGames,
 }

@@ -1,10 +1,21 @@
 import { ajaxBaseState } from 'flux-entities'
 
 import * as types from './constants'
+import { N_GAMES } from '../../constants'
 
-const initialState = ajaxBaseState()
+const initialState = {
+  ...ajaxBaseState(),
+  nGames: N_GAMES,
+}
 
 const pastGames = (state = initialState, action) => {
+  if (action.type === types.SET_PAST_N_GAMES) {
+    return {
+      ...state,
+      nGames: action.payload.nGames,
+    }
+  }
+
   if (action.type === types.FETCH_PAST_GAMES_FOR_TEAM_REQUEST) {
     return {
       ...state,

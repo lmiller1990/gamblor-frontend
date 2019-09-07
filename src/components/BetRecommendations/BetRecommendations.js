@@ -18,6 +18,7 @@ function BetRecommendations({
   location,
   gameIds,
   fetchRecommendations,
+  setPastNGames,
 }) {
   const [minEv, setMinEv] = useState(1)
   const [prevNumPastGames, setPrevNumPastGames] = useState(N_GAMES)
@@ -124,6 +125,7 @@ function BetRecommendations({
 
   const fetchAndUpdateNumPastBets = () => {
     setPrevNumPastGames(numPastGames)
+    setPastNGames({ nGames: numPastGames })
     fetchRecommendations({
       pastNGames: numPastGames,
       gameIds
