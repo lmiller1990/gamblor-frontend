@@ -15,7 +15,7 @@ const fetchRecommendations = ({ gameIds, pastNGames = N_GAMES }) => {
   return async dispatch => {
     try {
       dispatch(fetchRecommendationsRequest())
-      const { data } = await axios.get(`http://localhost:5000/recommendations?past_n_games=${pastNGames}&game_ids=${gameIds}`, {
+      const { data } = await axios.get(`/api/recommendations?past_n_games=${pastNGames}&game_ids=${gameIds}`, {
         transformResponse: [
           (data) => {
             return camelcaseKeys(JSON.parse(data), { deep: true })

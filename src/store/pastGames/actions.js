@@ -12,7 +12,7 @@ const fetchPastGamesForTeam = ({ teamId, n = N_GAMES }) => {
   return async dispatch => {
     try {
       dispatch(fetchPastGamesForTeamRequest())
-      const { data } = await axios.get(`http://localhost:5000/previous_game_results?team_id=${teamId}&n=${n}`, {
+      const { data } = await axios.get(`/api/previous_game_results?team_id=${teamId}&n=${n}`, {
         transformResponse: [
           (data) => {
             return camelcaseKeys(JSON.parse(data), { deep: true })

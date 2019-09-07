@@ -13,7 +13,7 @@ const fetchTeams = () => {
   return async dispatch => {
     try {
       dispatch(fetchTeamsRequest())
-      const { data } = await axios.get('http://localhost:5000/teams', {
+      const { data } = await axios.get('/api/teams', {
         transformResponse: [
           data => camelcaseKeys(JSON.parse(data), { deep: true })
         ]

@@ -12,7 +12,7 @@ const fetchLeagues = () => {
   return async dispatch => {
     try {
       dispatch(fetchLeaguesRequest())
-      const { data } = await axios.get('http://localhost:5000/leagues')
+      const { data } = await axios.get('/api/leagues')
       dispatch(fetchLeaguesSuccess(data))
     } catch (e) {
       dispatch(fetchLeaugesFailure(e.message))

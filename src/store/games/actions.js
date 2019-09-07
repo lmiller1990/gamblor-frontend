@@ -12,7 +12,7 @@ const fetchSchedule = ({ leagueId }) => {
   return async dispatch => {
     try {
       dispatch(fetchScheduleRequest())
-      const { data } = await axios.get(`http://localhost:5000/schedule?league=${leagueId}`, {
+      const { data } = await axios.get(`/api/schedule?league=${leagueId}`, {
         transformResponse: [
           (data) => {
             return camelcaseKeys(JSON.parse(data), { deep: true })
