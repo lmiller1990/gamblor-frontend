@@ -8,12 +8,23 @@ import Col from 'react-bootstrap/Col'
 import sortBy from 'lodash/sortBy'
 
 import { formatDate } from '../../utils/date'
+import { N_GAMES } from '../../constants'
 import './index.scss'
 
-function BetRecommendations({ recommendations, allTeams, history, location }) {
+function BetRecommendations({
+  recommendations,
+  allTeams,
+  history,
+  location,
+  gameIds,
+  fetchRecommendations,
+}) {
   const [minEv, setMinEv] = useState(1)
+  const [prevNumPastGames, setPrevNumPastGames] = useState(N_GAMES)
+  const [numPastGames, setNumPastGames] = useState(N_GAMES)
   const [minDiff, setMinDiff] = useState(10)
   const [selectedId, setId] = useState()
+
 
   useEffect(() => {
     const { betId } = parse(location.search)
@@ -111,9 +122,18 @@ function BetRecommendations({ recommendations, allTeams, history, location }) {
     )
   }
 
+  const fetchAndUpdateNumPastBets = () => {
+    setPrevNumPastGames(numPastGames)
+    fetchRecommendations({
+      pastNGames: numPastGames,
+      gameIds
+    })
+  }
+
+  const hasNumPastGamesChanged = numPastGames !== prevNumPastGames
   const filters = (
     <Form.Row>
-      <Form.Group as={Col} controlId='filter-min-ev'>
+      <Form.Group sm='2' as={Col} controlId='filter-min-ev'>
         <Form.Label>
           <small>Min EV</small>
         </Form.Label>
@@ -124,14 +144,39 @@ function BetRecommendations({ recommendations, allTeams, history, location }) {
         />
       </Form.Group>
 
-      <Form.Group as={Col} controlId='filter-diff'>
+      <Form.Group sm='3' as={Col} controlId='filter-diff'>
         <Form.Label>
-          <small>Min Success Diff (%)</small>
+          <small>Min Diff (%)</small>
         </Form.Label>
         <Form.Control 
           size='sm'
           value={minDiff ? minDiff : ''}
           onChange={e => setMinDiff(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group sm='4' as={Col} controlId='past-games'>
+        <Form.Label>
+          <small>No. Past games</small>
+        </Form.Label>
+        <Form.Control 
+          size='sm'
+          value={numPastGames ? numPastGames : ''}
+          onChange={e => setNumPastGames(parseInt(e.target.value))}
+          onKeyPress={e => e.key === 'Enter' && fetchAndUpdateNumPastBets()}
+        />
+      </Form.Group>
+
+      <Form.Group sm='3' as={Col} controlId='past-games'>
+        <Form.Label className='text-white'>
+          <small>Submit</small>
+        </Form.Label>
+        <Form.Control  
+          type='button'
+          size='sm'
+          value='Go'
+          disabled={!hasNumPastGamesChanged}
+          onClick={fetchAndUpdateNumPastBets}
         />
       </Form.Group>
     </Form.Row>

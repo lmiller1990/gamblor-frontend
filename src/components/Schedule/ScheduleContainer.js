@@ -3,7 +3,6 @@ import { withRouter } from 'react-router'
 import { mapEntities } from 'flux-entities'
 
 import { Schedule } from './Schedule'
-import { fetchRecommendations } from '../../store/recommendations/actions'
 import { fetchSchedule } from '../../store/games/actions'
 
 const mapStateToProps = state => {
@@ -16,7 +15,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchSchedule: leagueId => dispatch(fetchSchedule({ leagueId })),
-    fetchRecommendations: gameIds => dispatch(fetchRecommendations({ gameIds }))
   }
 }
 
