@@ -43,7 +43,6 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
     if (!league) {
       return
     }
-    fetchSchedule(league)
     const qs = stringify({...parse(location.search), league })
     history.push({ search: `?${qs}` })
   }
