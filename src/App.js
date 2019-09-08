@@ -14,6 +14,7 @@ import { ScheduleContainer } from './components/Schedule'
 import { BetRecommendationsContainer } from './components/BetRecommendations'
 import { MarketLineGraphContainer } from './components/MarketLineGraph'
 import { MarketHistoryContainer } from './components/MarketHistory'
+import { TeamRankingsContainer } from './components/TeamRankings'
 
 
 function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
@@ -38,44 +39,80 @@ function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
 
   }, [location, setCurrentTeamIds])
 
+
+  const { betId } = parse(location.search)
+
+  const betRecommendationStats = () => {
+    if (!betId) {
+      return (
+        <Card className='h-100 d-flex align-items-center justify-content-center'>
+          <small style={{ width: '450px' }}>
+            No bet recommendation selected. 
+            Select a leage and bet recommendation to view the 
+            past data relevant to the recommendation.
+          </small>
+        </Card>
+      )
+    }
+
+    return (
+      <Card>
+        <h6 className='text-center'>Past Games</h6>
+        <Row>
+          <Col>
+            <MarketHistoryContainer
+              teamId={currentTeamIds.blueId}
+            />
+          </Col>
+          <Col>
+            <MarketHistoryContainer 
+              teamId={currentTeamIds.redId}
+            />
+          </Col>
+        </Row>
+      </Card>
+    )
+  }
+
+  const marketLineGraph = () => {
+    if (!betId) {
+      return
+    }
+
+    return (
+      <Row>
+        <Col>
+          <MarketLineGraphContainer 
+            redId={currentTeamIds.redId}
+            blueId={currentTeamIds.blueId}
+          />
+        </Col>
+      </Row>
+    )
+  }
+
+
   const content = () => {
     if (!isLoaded) {
-      return <span />
+      return <span>Loading...</span>
     }
 
     return (
       <Container className='p-1'>
         <Row>
           <Col>
-            <Row>
-              <Col>
-                <MarketLineGraphContainer 
-                  redId={currentTeamIds.redId}
-                  blueId={currentTeamIds.blueId}
-                />
-              </Col>
-            </Row>
+            {marketLineGraph()}
 
-            <Card>
-              <h6 className='text-center'>Past Games</h6>
-              <Row>
-                <Col>
-                  <MarketHistoryContainer
-                    teamId={currentTeamIds.blueId}
-                  />
-                </Col>
-                <Col>
-                  <MarketHistoryContainer 
-                    teamId={currentTeamIds.redId}
-                  />
-                </Col>
-              </Row>
-            </Card>
+            {betRecommendationStats()}
           </Col>
 
           <Col>
             <Row>
               <ScheduleContainer />
+            </Row>
+
+            <Row>
+              <TeamRankingsContainer />
             </Row>
 
             <Row>

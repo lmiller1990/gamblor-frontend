@@ -67,12 +67,28 @@ function Schedule({ fetchSchedule, allLeagues, leagues, location, history  }) {
     </Form.Row>
   )
 
+  const content = () => {
+    if (!currLeagueId) {
+      return (
+        <small>
+          <div className='text-center p-1 pt-2'>
+            Select a league to see the win rate for each team.
+          </div>
+        </small>
+      )
+    }
+
+    return (
+      <hr className='mt-2 mb-2' />
+    )
+  }
+
   return (
     <Container>
       <Card>
         <h6 className='text-center'>Schedule</h6>
         {filters}
-        <hr className='mt-2 mb-2' />
+        {content()}
         <UpcomingGamesContainer
           leagueId={currLeagueId}
         />

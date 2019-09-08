@@ -6,6 +6,8 @@ import { leagues } from './leagues/reducer'
 import { pastGames } from './pastGames/reducer'
 import { recommendations } from './recommendations/reducer'
 import { teams } from './teams/reducer'
+import { teamRankings } from './teamRankings/reducer'
+
 
 const rootReducer = combineReducers({
   games: gamesReducer,
@@ -13,6 +15,7 @@ const rootReducer = combineReducers({
   pastGames,
   recommendations,
   teams,
+  teamRankings,
 })
 
 

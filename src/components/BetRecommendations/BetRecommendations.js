@@ -199,28 +199,40 @@ function BetRecommendations({
     })
     .reverse()
 
+  const table = (
+    <Table hover>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Matchup</th>
+          <th>Odds</th>
+          <th>EV</th>
+          <th>Success</th>
+          <th>Opp. Success</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {sortedRecommendations.map(recommendationRow)}
+      </tbody>
+    </Table>
+  )
+
+  const content = () => {
+    if (!sortedRecommendations.length) {
+      return <div className='text-center p-1'>Select a league to see the win rate for each team.</div>
+    }
+
+    return table
+  }
+
   return (
     <Container id='recommendations-table'>
       <Card>
         <h6 className='text-center'>Upcoming Market Data</h6>
         {filters}
         <small>
-          <Table hover>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Matchup</th>
-                <th>Odds</th>
-                <th>EV</th>
-                <th>Success</th>
-                <th>Opp. Success</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {sortedRecommendations.map(recommendationRow)}
-            </tbody>
-          </Table>
+          {content()}
         </small>
       </Card>
     </Container>
