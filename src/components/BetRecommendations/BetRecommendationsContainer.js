@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { mapEntities } from 'flux-entities'
+import { mapEntities, isLoaded } from 'flux-entities'
 import { withRouter } from 'react-router'
 
 import { BetRecommendations } from './BetRecommendations'
@@ -11,6 +11,7 @@ const mapStateToProps = state => {
     recommendations: mapEntities(state.recommendations),
     allTeams: state.teams.all,
     gameIds: state.games.ids,
+    recommendationsLoaded: isLoaded(state.recommendations),
   }
 }
 

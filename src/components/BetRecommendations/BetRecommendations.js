@@ -19,6 +19,7 @@ function BetRecommendations({
   gameIds,
   fetchRecommendations,
   setPastNGames,
+  recommendationsLoaded,
 }) {
   const [minEv, setMinEv] = useState(1)
   const [prevNumPastGames, setPrevNumPastGames] = useState(N_GAMES)
@@ -220,6 +221,10 @@ function BetRecommendations({
 
   const content = () => {
     if (!sortedRecommendations.length) {
+      if (recommendationsLoaded) {
+        return <div className='text-center p-1'>No recommendations available at the moment.</div>
+      }
+
       return <div className='text-center p-1'>Select a league to see the win rate for each team.</div>
     }
 
