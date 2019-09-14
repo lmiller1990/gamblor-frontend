@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { parse } from 'query-string'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card'
 
+import { Btn } from '../Btn'
+
 
 function TeamRankings({ fetchTeamRankings, rankedTeams, location, teamRankings }) {
+  const [currentMarket, setCurrentMarket] = useState('winrate')
   const { league } = parse(location.search)
 
   useEffect(() => {
@@ -19,14 +22,14 @@ function TeamRankings({ fetchTeamRankings, rankedTeams, location, teamRankings }
 
   const sortRanked = () => 
     teamRankings
-      .sort((x, y) => y.winrate - x.winrate)
+      .sort((x, y) => y[currentMarket] - x[currentMarket])
       .map(teamRank =>
         <div key={teamRank.id} className='d-flex'>
           <div style={{ width: '50px' }}>
             {teamRank.shortName.toUpperCase()}
           </div>
           <div>
-            {(teamRank.winrate * 100).toFixed(0)}%
+            {(teamRank[currentMarket] * 100).toFixed(0)}%
           </div>
         </div>
       )
@@ -53,6 +56,50 @@ function TeamRankings({ fetchTeamRankings, rankedTeams, location, teamRankings }
     )
   }
 
+  const marketBtns = (
+    <small className='d-flex justify-content-center mt-2'>
+      <Btn 
+        className='mr-1' 
+        isActive={'fb' === currentMarket} 
+        handleClick={() => setCurrentMarket('fb')}
+      >
+        FB
+      </Btn>
+
+      <Btn 
+        className='mr-1' 
+        isActive={'ft' === currentMarket} 
+        handleClick={() => setCurrentMarket('ft')}
+      >
+        FT
+      </Btn>
+
+      <Btn 
+        className='mr-1' 
+        isActive={'fd' === currentMarket} 
+        handleClick={() => setCurrentMarket('fd')}
+      >
+        FD
+      </Btn>
+
+      <Btn 
+        className='mr-1' 
+        isActive={'fbaron' === currentMarket}  
+        handleClick={() => setCurrentMarket('fbaron')}
+      >
+        FBaron
+      </Btn>
+
+      <Btn 
+        className='mr-1' 
+        isActive={'winrate' === currentMarket}  
+        handleClick={() => setCurrentMarket('winrate')}
+      >
+        Winrate
+      </Btn>
+    </small>
+  )
+
   return (
     <Container>
       <Card>
@@ -60,6 +107,7 @@ function TeamRankings({ fetchTeamRankings, rankedTeams, location, teamRankings }
         <small className='d-flex justify-content-center'>
           {content()}
         </small>
+        {marketBtns}
       </Card>
     </Container>
   )

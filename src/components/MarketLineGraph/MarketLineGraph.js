@@ -19,15 +19,15 @@ const getData = (blueTeamDataset, redTeamDataset) => {
       {
         label: blueTeamDataset.teamName,
         fill: false,
-        backgroundColor: 'lightblue',
-        borderColor: 'lightblue',
+        borderColor: 'blue',
+        backgroundColor: 'blue',
         data: blueTeamDataset.data,
       },
       {
         label: redTeamDataset.teamName,
         fill: false,
-        backgroundColor: 'rgba(255, 0, 0, 0.6)',
-        borderColor: 'rgba(255, 0, 0, 0.6)',
+        borderColor: 'purple',
+        backgroundColor: 'purple',
         data: redTeamDataset.data,
       }
     ]
