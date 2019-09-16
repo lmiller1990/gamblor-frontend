@@ -125,6 +125,10 @@ function BetRecommendations({
   }
 
   const fetchAndUpdateNumPastBets = () => {
+    if (numPastGames === 0) {
+      return
+    }
+
     setPrevNumPastGames(numPastGames)
     setPastNGames({ nGames: numPastGames })
     fetchRecommendations({
