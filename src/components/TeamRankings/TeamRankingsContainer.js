@@ -8,7 +8,8 @@ import { fetchTeamRankings } from '../../store/teamRankings/actions'
 
 const mapStateToProps = state => {
   return {
-    teamRankings: mapEntities(state.teamRankings)
+    teamRankings: mapEntities(state.teamRankings),
+    nGames: state.pastGames.nGames,
   }
 }
 

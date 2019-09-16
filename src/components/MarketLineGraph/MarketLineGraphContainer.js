@@ -11,6 +11,7 @@ const mapStateToProps = state => {
   return {
     pastGames,
     allTeams,
+    nGames: state.pastGames.nGames,
   }
 }
 

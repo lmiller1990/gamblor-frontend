@@ -5,14 +5,14 @@ import Table from 'react-bootstrap/Table'
 import { formatDate } from '../../utils/date'
 import './index.scss'
 
-function MarketHistory({ teamId, fetchPastGamesForTeam, results, allTeams, location }) {
+function MarketHistory({ nGames, teamId, fetchPastGamesForTeam, results, allTeams, location }) {
   useEffect(() => {
     if (!teamId) {
       return
     }
 
-    fetchPastGamesForTeam(teamId)
-  }, [teamId, fetchPastGamesForTeam])
+    fetchPastGamesForTeam({ teamId, nGames })
+  }, [teamId, nGames, fetchPastGamesForTeam])
 
   const marketResult = success => {
     const resultClass = success ? 'success' : 'failure'

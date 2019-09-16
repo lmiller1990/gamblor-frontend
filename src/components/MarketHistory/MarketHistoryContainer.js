@@ -11,14 +11,15 @@ const mapStateToProps = (state, { teamId }) => {
 
   return {
     teamId,
-    results: sortBy(gamesForTeam, ['date', 'gameNumber']).reverse(),
-    allTeams: state.teams.all
+    results: sortBy(gamesForTeam, ['date', 'gameNumber']).reverse().slice(0, state.pastGames.nGames),
+    allTeams: state.teams.all,
+    nGames: state.pastGames.nGames,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPastGamesForTeam: teamId => dispatch(fetchPastGamesForTeam({ teamId }))
+    fetchPastGamesForTeam: ({ teamId, nGames }) => dispatch(fetchPastGamesForTeam({ teamId, nGames }))
   }
 }
 

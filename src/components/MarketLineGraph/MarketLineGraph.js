@@ -46,11 +46,19 @@ const options = {
   }
 }
 
-function MarketLineGraph({ redId, blueId, location, pastGames, allTeams }) {
+function MarketLineGraph({ nGames, redId, blueId, location, pastGames, allTeams }) {
   const { market } = parse(location.search)
   const gamesFor = teamId => pastGames.filter(x => x.teamId === teamId)
+  // only get most recent n games
   const blueGames = sortBy(gamesFor(blueId), ['date', 'gameNumber'])
+    .reverse()
+    .slice(0, nGames)
+    .reverse()
   const redGames = sortBy(gamesFor(redId), ['date', 'gameNumber'])
+    .reverse()
+    .slice(0, nGames)
+    .reverse()
+
 
   if (!redId || !blueId) {
     return <></>

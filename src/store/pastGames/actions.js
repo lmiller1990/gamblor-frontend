@@ -9,11 +9,11 @@ const fetchPastGamesForTeamSuccess = payload => ({ type: types.FETCH_PAST_GAMES_
 const fetchPastGamesForTeamFailure = payload => ({ type: types.FETCH_PAST_GAMES_FOR_TEAM_FAILURE, payload })
 const setPastNGames = ({ nGames }) => ({ type: types.SET_PAST_N_GAMES, payload: { nGames } })
 
-const fetchPastGamesForTeam = ({ teamId, n = N_GAMES }) => {
+const fetchPastGamesForTeam = ({ teamId, nGames = N_GAMES }) => {
   return async dispatch => {
     try {
       dispatch(fetchPastGamesForTeamRequest())
-      const { data } = await axios.get(`/api/previous_game_results?team_id=${teamId}&n=${n}`, {
+      const { data } = await axios.get(`/api/previous_game_results?team_id=${teamId}&n=${nGames}`, {
         transformResponse: [
           (data) => {
             return camelcaseKeys(JSON.parse(data), { deep: true })

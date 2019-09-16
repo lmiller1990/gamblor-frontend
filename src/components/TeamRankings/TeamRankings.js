@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import capitalize from 'lodash/capitalize'
 import { parse } from 'query-string'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
@@ -8,7 +9,7 @@ import Card from 'react-bootstrap/Card'
 import { Btn } from '../Btn'
 
 
-function TeamRankings({ fetchTeamRankings, rankedTeams, location, teamRankings }) {
+function TeamRankings({ nGames, fetchTeamRankings, rankedTeams, location, teamRankings }) {
   const [currentMarket, setCurrentMarket] = useState('winrate')
   const { league } = parse(location.search)
 
@@ -17,8 +18,8 @@ function TeamRankings({ fetchTeamRankings, rankedTeams, location, teamRankings }
       return
     }
 
-    fetchTeamRankings({ leagueId: league, pastNGames: 18 })
-  }, [league, fetchTeamRankings])
+    fetchTeamRankings({ leagueId: league, pastNGames: nGames })
+  }, [league, fetchTeamRankings, nGames])
 
   const sortRanked = () => 
     teamRankings
@@ -103,7 +104,7 @@ function TeamRankings({ fetchTeamRankings, rankedTeams, location, teamRankings }
   return (
     <Container>
       <Card>
-        <h6 className='text-center'>Winrate (last 18 games)</h6>
+        <h6 className='text-center'>{capitalize(currentMarket)} (last {nGames} games)</h6>
         <small className='d-flex justify-content-center'>
           {content()}
         </small>
