@@ -1,4 +1,33 @@
+body {
+  background: aliceblue;
+  font: 1rem trebuchet ms;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 50% 50%;
 }
+
+#hero-1 {
+  font-size: 2.5rem;
+}
+
+#hero-2 {
+  font-size: 1.5rem;
+}
+
+#faqs {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+img#preview {
+  width: 100%;
+  border-radius: 5px 
+}
+
+.c1 { color: gold; }
+.c2 { color: darkblue; }
+.c3 { color: hotpink; }
+.c4 { color: hotpink; }
+
