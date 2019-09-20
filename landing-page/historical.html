@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <title>LolTrack | 2019 Summer Split</title>
+    <style>
+.zui-table {
+  border: solid 1px #DDEEEE;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font: normal 13px Arial, sans-serif;
+}
+.zui-table thead th {
+  background-color: #DDEFEF;
+  border: solid 1px #DDEEEE;
+  color: #336B6B;
+  padding: 10px;
+  text-align: left;
+  text-shadow: 1px 1px 1px #fff;
+}
+.zui-table tbody td {
+  border: solid 1px #DDEEEE;
+  color: #333;
+  padding: 10px;
+  text-shadow: 1px 1px 1px #fff;
+}
+    </style>
+  </head>
+  <body>
+    <table class="zui-table">
+      <thead>
+        <th>Team</th>
+        <th>Opponent</th>
+        <th>Market</th>
+        <th>Odds</th>
+        <th>Stake</th>
+        <th>Return</th>
+        <th>Running Total</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TL</td>
+          <td>TSM</td>
+          <td>First Dragon</td>
+          <td>1.83</td>
+          <td>$20</td>
+          <td>$36.67</td>
+          <td>$216.67</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>OPT</td>
+          <td>First Blood</td>
+          <td>2</td>
+          <td>$20</td>
+          <td>$0</td>
+          <td>$196.67</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>FOX</td>
+          <td>First Blood</td>
+          <td>1.8</td>
+          <td>$20</td>
+          <td>$36</td>
+          <td>$212.67</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>C9</td>
+          <td>First Blood</td>
+          <td>2.25</td>
+          <td>$20</td>
+          <td>$45</td>
+          <td>$237.67</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>FLY</td>
+          <td>First Dragon</td>
+          <td>1.83</td>
+          <td>$20</td>
+          <td>$36.67</td>
+          <td>$254.34</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>TSM</td>
+          <td>First Dragon</td>
+          <td>2.37</td>
+          <td>$20</td>
+          <td>$47.5</td>
+          <td>$281.84</td>
+        </tr>
+        <tr>
+          <td>FLY</td>
+          <td>TSM</td>
+          <td>First Dragon</td>
+          <td>2.25</td>
+          <td>$30</td>
+          <td>$67.5</td>
+          <td>$319.34</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>CG</td>
+          <td>First Dragon</td>
+          <td>1.72</td>
+          <td>$30</td>
+          <td>$0</td>
+          <td>$289.34</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>100</td>
+          <td>First Blood</td>
+          <td>1.9</td>
+          <td>$30</td>
+          <td>$57.28</td>
+          <td>$316.62</td>
+        </tr>
+        <tr>
+          <td>FOX</td>
+          <td>TSM</td>
+          <td>First Dragon</td>
+          <td>2.37</td>
+          <td>$30</td>
+          <td>$0</td>
+          <td>$286.62</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>C9</td>
+          <td>First Blood</td>
+          <td>2.25</td>
+          <td>$30</td>
+          <td>$67.5</td>
+          <td>$324.12</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>C9</td>
+          <td>First Dragon</td>
+          <td>2.2</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$284.12</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>FOX</td>
+          <td>First Blood</td>
+          <td>1.83</td>
+          <td>$30</td>
+          <td>$55</td>
+          <td>$309.12</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>100</td>
+          <td>First Dragon</td>
+          <td>1.61</td>
+          <td>$40</td>
+          <td>$64.62</td>
+          <td>$333.74</td>
+        </tr>
+        <tr>
+          <td>TL</td>
+          <td>OPT</td>
+          <td>First Turret</td>
+          <td>1.57</td>
+          <td>$50</td>
+          <td>$78.58</td>
+          <td>$362.32</td>
+        </tr>
+        <tr>
+          <td>C9</td>
+          <td>TSM</td>
+          <td>First Dragon</td>
+          <td>1.83</td>
+          <td>$30</td>
+          <td>$55</td>
+          <td>$387.32</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>FLY</td>
+          <td>First Blood</td>
+          <td>1.83</td>
+          <td>$50</td>
+          <td>$0</td>
+          <td>$337.32</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>CLG</td>
+          <td>First Dragon</td>
+          <td>1.72</td>
+          <td>$40</td>
+          <td>$69.1</td>
+          <td>$366.42</td>
+        </tr>
+        <tr>
+          <td>FLY</td>
+          <td>CLG</td>
+          <td>First Dragon</td>
+          <td>2.1</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$326.42</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>FOX</td>
+          <td>First Blood</td>
+          <td>1.72</td>
+          <td>$60</td>
+          <td>$103.63</td>
+          <td>$370.05</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>TSM</td>
+          <td>First Dragon</td>
+          <td>2.1</td>
+          <td>$60</td>
+          <td>$0</td>
+          <td>$310.05</td>
+        </tr>
+        <tr>
+          <td>FLY</td>
+          <td>100</td>
+          <td>First Dragon</td>
+          <td>1.8</td>
+          <td>$40</td>
+          <td>$72</td>
+          <td>$342.05</td>
+        </tr>
+        <tr>
+          <td>C9</td>
+          <td>TL</td>
+          <td>First Baron</td>
+          <td>2.62</td>
+          <td>$50</td>
+          <td>$131.25</td>
+          <td>$423.3</td>
+        </tr>
+        <tr>
+          <td>FLY</td>
+          <td>FOX</td>
+          <td>First Blood</td>
+          <td>1.83</td>
+          <td>$40</td>
+          <td>$73.34</td>
+          <td>$456.64</td>
+        </tr>
+        <tr>
+          <td>TSM</td>
+          <td>100</td>
+          <td>First Blood</td>
+          <td>1.61</td>
+          <td>$30</td>
+          <td>$48.47</td>
+          <td>$475.11</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>FOX</td>
+          <td>First Blood</td>
+          <td>1.61</td>
+          <td>$30</td>
+          <td>$48.47</td>
+          <td>$493.58</td>
+        </tr>
+        <tr>
+          <td>C9</td>
+          <td>TSM</td>
+          <td>First Dragon</td>
+          <td>1.83</td>
+          <td>$50</td>
+          <td>$0</td>
+          <td>$443.58</td>
+        </tr>
+        <tr>
+          <td>FOX</td>
+          <td>100</td>
+          <td>First Dragon</td>
+          <td>2.1</td>
+          <td>$30</td>
+          <td>$63</td>
+          <td>$476.58</td>
+        </tr>
+        <tr>
+          <td>C9</td>
+          <td>TSM</td>
+          <td>First Baron</td>
+          <td>1.8</td>
+          <td>$50</td>
+          <td>$0</td>
+          <td>$426.58</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>CLG</td>
+          <td>First Turret</td>
+          <td>2</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$386.58</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>OPT</td>
+          <td>First Turret</td>
+          <td>2</td>
+          <td>$40</td>
+          <td>$80</td>
+          <td>$426.58</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>OPT</td>
+          <td>First Blood</td>
+          <td>1.9</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$386.58</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>FOX</td>
+          <td>First Blood</td>
+          <td>1.66</td>
+          <td>$40</td>
+          <td>$66.67</td>
+          <td>$413.25</td>
+        </tr>
+        <tr>
+          <td>100</td>
+          <td>C9</td>
+          <td>First Turret</td>
+          <td>2.37</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$373.25</td>
+        </tr>
+        <tr>
+          <td>FLY</td>
+          <td>100</td>
+          <td>First Blood</td>
+          <td>2</td>
+          <td>$40</td>
+          <td>$80</td>
+          <td>$413.25</td>
+        </tr>
+        <tr>
+          <td>100</td>
+          <td>FLY</td>
+          <td>First Turret</td>
+          <td>1.72</td>
+          <td>$50</td>
+          <td>$86.37</td>
+          <td>$449.62</td>
+        </tr>
+        <tr>
+          <td>FOX</td>
+          <td>CG</td>
+          <td>First Dragon</td>
+          <td>2.22</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$409.62</td>
+        </tr>
+        <tr>
+          <td>TSM</td>
+          <td>FOX</td>
+          <td>First Blood</td>
+          <td>1.61</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$369.62</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>FOX</td>
+          <td>First Blood</td>
+          <td>1.61</td>
+          <td>$40</td>
+          <td>$64.62</td>
+          <td>$394.24</td>
+        </tr>
+        <tr>
+          <td>FLY</td>
+          <td>C9</td>
+          <td>First Blood</td>
+          <td>2.2</td>
+          <td>$40</td>
+          <td>$88</td>
+          <td>$442.24</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>FLY</td>
+          <td>First Turret</td>
+          <td>1.72</td>
+          <td>$40</td>
+          <td>$69.1</td>
+          <td>$471.34</td>
+        </tr>
+        <tr>
+          <td>TL</td>
+          <td>C9</td>
+          <td>First Dragon</td>
+          <td>1.61</td>
+          <td>$40</td>
+          <td>$64.62</td>
+          <td>$495.96</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>C9</td>
+          <td>First Turret</td>
+          <td>2.25</td>
+          <td>$50</td>
+          <td>$112.5</td>
+          <td>$558.46</td>
+        </tr>
+        <tr>
+          <td>FLY</td>
+          <td>TSM</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$50</td>
+          <td>$0</td>
+          <td>$508.46</td>
+        </tr>
+        <tr>
+          <td>GGS</td>
+          <td>C9</td>
+          <td>First Dragon</td>
+          <td>2.2</td>
+          <td>$50</td>
+          <td>$0</td>
+          <td>$458.46</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>100</td>
+          <td>First Dragon</td>
+          <td>1.66</td>
+          <td>$50</td>
+          <td>$83.34</td>
+          <td>$491.8</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>OPT</td>
+          <td>First Dragon</td>
+          <td>1.8</td>
+          <td>$50</td>
+          <td>$90</td>
+          <td>$531.8</td>
+        </tr>
+        <tr>
+          <td>TL</td>
+          <td>TSM</td>
+          <td>First Dragon</td>
+          <td>1.61</td>
+          <td>$50</td>
+          <td>$80.77</td>
+          <td>$562.57</td>
+        </tr>
+        <tr>
+          <td>SK</td>
+          <td>VIT</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$40</td>
+          <td>$84</td>
+          <td>$606.57</td>
+        </tr>
+        <tr>
+          <td>SK</td>
+          <td>VIT</td>
+          <td>First Turret</td>
+          <td>2.2</td>
+          <td>$30</td>
+          <td>$66</td>
+          <td>$642.57</td>
+        </tr>
+        <tr>
+          <td>SK</td>
+          <td>VIT</td>
+          <td>First Dragon</td>
+          <td>2.1</td>
+          <td>$30</td>
+          <td>$0</td>
+          <td>$612.57</td>
+        </tr>
+        <tr>
+          <td>XL</td>
+          <td>OG</td>
+          <td>First Turret</td>
+          <td>2.37</td>
+          <td>$20</td>
+          <td>$0</td>
+          <td>$592.57</td>
+        </tr>
+        <tr>
+          <td>XL</td>
+          <td>OG</td>
+          <td>First Baron</td>
+          <td>2.75</td>
+          <td>$20</td>
+          <td>$0</td>
+          <td>$572.57</td>
+        </tr>
+        <tr>
+          <td>VIT</td>
+          <td>FNC</td>
+          <td>First Dragon</td>
+          <td>2.2</td>
+          <td>$30</td>
+          <td>$0</td>
+          <td>$542.57</td>
+        </tr>
+        <tr>
+          <td>RGE</td>
+          <td>S04</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$30</td>
+          <td>$63</td>
+          <td>$575.57</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>TSM</td>
+          <td>First Turret</td>
+          <td>2.25</td>
+          <td>$75</td>
+          <td>$168.75</td>
+          <td>$669.32</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>TSM</td>
+          <td>First Turret</td>
+          <td>2.25</td>
+          <td>$75</td>
+          <td>$168.75</td>
+          <td>$763.07</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>TSM</td>
+          <td>First Turret</td>
+          <td>2.25</td>
+          <td>$75</td>
+          <td>$168.75</td>
+          <td>$856.82</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>OPT</td>
+          <td>First Dragon</td>
+          <td>1.72</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$816.82</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>OPT</td>
+          <td>First Dragon</td>
+          <td>1.72</td>
+          <td>$40</td>
+          <td>$0</td>
+          <td>$776.82</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>OPT</td>
+          <td>First Dragon</td>
+          <td>1.72</td>
+          <td>$40</td>
+          <td>$69.1</td>
+          <td>$805.92</td>
+        </tr>
+        <tr>
+          <td>MSF</td>
+          <td>VIT</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$30</td>
+          <td>$63</td>
+          <td>$838.92</td>
+        </tr>
+        <tr>
+          <td>RGE</td>
+          <td>OG</td>
+          <td>First Blood</td>
+          <td>2</td>
+          <td>$30</td>
+          <td>$0</td>
+          <td>$808.92</td>
+        </tr>
+        <tr>
+          <td>SK</td>
+          <td>OG</td>
+          <td>First Dragon</td>
+          <td>2.2</td>
+          <td>$30</td>
+          <td>$0</td>
+          <td>$778.92</td>
+        </tr>
+        <tr>
+          <td>SK</td>
+          <td>OG</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$30</td>
+          <td>$63</td>
+          <td>$811.92</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>C9</td>
+          <td>First Dragon</td>
+          <td>2</td>
+          <td>$25</td>
+          <td>$0</td>
+          <td>$786.92</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>C9</td>
+          <td>First Dragon</td>
+          <td>2</td>
+          <td>$25</td>
+          <td>$0</td>
+          <td>$761.92</td>
+        </tr>
+        <tr>
+          <td>CLG</td>
+          <td>C9</td>
+          <td>First Dragon</td>
+          <td>2</td>
+          <td>$25</td>
+          <td>$0</td>
+          <td>$736.92</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>CLG</td>
+          <td>First Turret</td>
+          <td>1.9</td>
+          <td>$75</td>
+          <td>$143.19</td>
+          <td>$805.11</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>CLG</td>
+          <td>First Turret</td>
+          <td>1.9</td>
+          <td>$75</td>
+          <td>$143.19</td>
+          <td>$873.3</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>CLG</td>
+          <td>First Turret</td>
+          <td>1.9</td>
+          <td>$75</td>
+          <td>$0</td>
+          <td>$798.3</td>
+        </tr>
+        <tr>
+          <td>VIT</td>
+          <td>S04</td>
+          <td>First Turret</td>
+          <td>2.1</td>
+          <td>$50</td>
+          <td>$105</td>
+          <td>$853.3</td>
+        </tr>
+        <tr>
+          <td>VIT</td>
+          <td>S04</td>
+          <td>First Turret</td>
+          <td>2.1</td>
+          <td>$50</td>
+          <td>$0</td>
+          <td>$803.3</td>
+        </tr>
+        <tr>
+          <td>VIT</td>
+          <td>S04</td>
+          <td>First Turret</td>
+          <td>2.1</td>
+          <td>$50</td>
+          <td>$0</td>
+          <td>$753.3</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>FLY</td>
+          <td>First Turret</td>
+          <td>1.57</td>
+          <td>$40</td>
+          <td>$62.86</td>
+          <td>$776.16</td>
+        </tr>
+        <tr>
+          <td>FLY</td>
+          <td>CG</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$30</td>
+          <td>$63</td>
+          <td>$809.16</td>
+        </tr>
+        <tr>
+          <td>FNC</td>
+          <td>G2</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$120</td>
+          <td>$0</td>
+          <td>$689.16</td>
+        </tr>
+        <tr>
+          <td>FNC</td>
+          <td>G2</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$120</td>
+          <td>$0</td>
+          <td>$569.16</td>
+        </tr>
+        <tr>
+          <td>FNC</td>
+          <td>G2</td>
+          <td>First Blood</td>
+          <td>2.1</td>
+          <td>$120</td>
+          <td>$252</td>
+          <td>$701.16</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>TSM</td>
+          <td>First Turret</td>
+          <td>1.8</td>
+          <td>$120</td>
+          <td>$0</td>
+          <td>$581.16</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>TSM</td>
+          <td>First Turret</td>
+          <td>1.8</td>
+          <td>$120</td>
+          <td>$0</td>
+          <td>$461.16</td>
+        </tr>
+        <tr>
+          <td>CG</td>
+          <td>TSM</td>
+          <td>First Turret</td>
+          <td>1.8</td>
+          <td>$120</td>
+          <td>$216</td>
+          <td>$557.16</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>&nbsp</td>
+          <td>&nbsp</td>
+          <td>&nbsp</td>
+          <td>&nbsp</td>
+          <td>&nbsp</td>
+          <td><b>$557.16</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
