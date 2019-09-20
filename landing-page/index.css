@@ -16,14 +16,13 @@ body {
   font-size: 1.5rem;
 }
 
-#faqs {
+.faqs {
   display: grid;
   grid-template-columns: 20% 80%;
 }
 
 img#preview {
-  width: 100%;
-  border-radius: 5px 
+  width: 95%;
 }
 
 .c1 { color: gold; }
@@ -31,3 +30,6 @@ img#preview {
 .c3 { color: hotpink; }
 .c4 { color: hotpink; }
 
+.align-right {
+  text-align: right;
+}
