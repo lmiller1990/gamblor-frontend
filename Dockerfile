@@ -10,3 +10,4 @@ RUN yarn build
 FROM nginx:alpine
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build-stage /app/build /usr/share/nginx/html
+COPY --from=build-stage /app/demo /usr/share/nginx/html
