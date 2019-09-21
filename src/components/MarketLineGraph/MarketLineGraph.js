@@ -14,7 +14,7 @@ const getData = (blueTeamDataset, redTeamDataset) => {
   }
 
   return {
-    labels: xAxisLabels,
+    labels: xAxisLabels.reverse(),
     datasets: [
       {
         label: blueTeamDataset.teamName,
@@ -37,7 +37,22 @@ const getData = (blueTeamDataset, redTeamDataset) => {
 const options = {
   maintainAspectRatio: false,
   scales: {
+    xAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Number of Past Games'
+      },
+      ticks: {
+        beginAtZero: true,
+        suggestedMax: 100
+      }
+    }],
+
     yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Average Success (%)'
+      },
       ticks: {
         beginAtZero: true,
         suggestedMax: 100
