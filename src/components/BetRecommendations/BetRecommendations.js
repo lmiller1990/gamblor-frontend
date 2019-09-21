@@ -3,6 +3,8 @@ import Table from 'react-bootstrap/Table'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
+import Tooltip from 'react-bootstrap/Tooltip'
 import { stringify, parse } from 'query-string'
 import Col from 'react-bootstrap/Col'
 import sortBy from 'lodash/sortBy'
@@ -10,6 +12,20 @@ import sortBy from 'lodash/sortBy'
 import { formatDate } from '../../utils/date'
 import { N_GAMES } from '../../constants'
 import './index.scss'
+
+function DemoTooltip({ children }) {
+  return (
+    <OverlayTrigger
+      overlay={
+        <Tooltip id='tooltip-top'>
+          Sign up for more flexibility in analytics and historical data.
+        </Tooltip>
+      }
+    >
+      {children}
+    </OverlayTrigger>
+  )
+}
 
 function BetRecommendations({
   recommendations,
@@ -137,55 +153,68 @@ function BetRecommendations({
     })
   }
 
+  const isDemoMode = process.env.REACT_APP_DEMO_MODE === 'true'
+
   const hasNumPastGamesChanged = numPastGames !== prevNumPastGames
   const filters = (
     <Form.Row>
-      <Form.Group sm='2' as={Col} controlId='filter-min-ev'>
-        <Form.Label>
-          <small>Min EV</small>
-        </Form.Label>
-        <Form.Control 
-          size='sm'
-          value={minEv ? minEv : ''}
-          onChange={e => setMinEv(e.target.value)}
-        />
-      </Form.Group>
+      <DemoTooltip>
+        <Form.Group sm='2' as={Col} controlId='filter-min-ev'>
+          <Form.Label>
+            <small>Min EV</small>
+          </Form.Label>
+          <Form.Control 
+            disabled={isDemoMode}
+            size='sm'
+            value={minEv ? minEv : ''}
+            onChange={e => setMinEv(e.target.value)}
+          />
+        </Form.Group>
+      </DemoTooltip>
 
-      <Form.Group sm='3' as={Col} controlId='filter-diff'>
-        <Form.Label>
-          <small>Min Diff (%)</small>
-        </Form.Label>
-        <Form.Control 
-          size='sm'
-          value={minDiff ? minDiff : ''}
-          onChange={e => setMinDiff(e.target.value)}
-        />
-      </Form.Group>
+      <DemoTooltip>
+        <Form.Group sm='3' as={Col} controlId='filter-diff'>
+          <Form.Label>
+            <small>Min Diff (%)</small>
+          </Form.Label>
+          <Form.Control 
+            size='sm'
+            disabled={isDemoMode}
+            value={minDiff ? minDiff : ''}
+            onChange={e => setMinDiff(e.target.value)}
+          />
+        </Form.Group>
+      </DemoTooltip>
 
-      <Form.Group sm='4' as={Col} controlId='past-games'>
-        <Form.Label>
-          <small>No. Past games</small>
-        </Form.Label>
-        <Form.Control 
-          size='sm'
-          value={numPastGames ? numPastGames : ''}
-          onChange={e => setNumPastGames(parseInt(e.target.value))}
-          onKeyPress={e => e.key === 'Enter' && fetchAndUpdateNumPastBets()}
-        />
-      </Form.Group>
+      <DemoTooltip>
+        <Form.Group sm='4' as={Col} controlId='past-games'>
+          <Form.Label>
+            <small>No. Past games</small>
+          </Form.Label>
+          <Form.Control 
+            size='sm'
+            disabled={isDemoMode}
+            value={numPastGames ? numPastGames : ''}
+            onChange={e => setNumPastGames(parseInt(e.target.value))}
+            onKeyPress={e => e.key === 'Enter' && fetchAndUpdateNumPastBets()}
+          />
+        </Form.Group>
+      </DemoTooltip>
 
-      <Form.Group sm='3' as={Col} controlId='past-games'>
-        <Form.Label className='text-white'>
-          <small>Submit</small>
-        </Form.Label>
-        <Form.Control  
-          type='button'
-          size='sm'
-          value='Go'
-          disabled={!hasNumPastGamesChanged}
-          onClick={fetchAndUpdateNumPastBets}
-        />
-      </Form.Group>
+      <DemoTooltip>
+        <Form.Group sm='3' as={Col} controlId='past-games'>
+          <Form.Label className='text-white'>
+            <small>Submit</small>
+          </Form.Label>
+          <Form.Control  
+            type='button'
+            size='sm'
+            value='Go'
+            disabled={!hasNumPastGamesChanged || isDemoMode}
+            onClick={fetchAndUpdateNumPastBets}
+          />
+        </Form.Group>
+      </DemoTooltip>
     </Form.Row>
   )
 
