@@ -24,16 +24,18 @@ function TeamRankings({ nGames, fetchTeamRankings, rankedTeams, location, teamRa
   const sortRanked = () => 
     teamRankings
       .sort((x, y) => y[currentMarket] - x[currentMarket])
-      .map(teamRank =>
-        <div key={teamRank.id} className='d-flex'>
-          <div style={{ width: '50px' }}>
-            {teamRank.shortName.toUpperCase()}
+      .map(teamRank => {
+        return (
+          <div key={teamRank.id} className='d-flex'>
+            <div style={{ width: '50px' }}>
+              {teamRank.shortName.toUpperCase()}
+            </div>
+            <div>
+              {(teamRank[currentMarket] * 100).toFixed(0)}%
+            </div>
           </div>
-          <div>
-            {(teamRank[currentMarket] * 100).toFixed(0)}%
-          </div>
-        </div>
-      )
+        )
+      })
 
 
   const content = () => {

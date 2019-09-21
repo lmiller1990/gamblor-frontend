@@ -21,7 +21,7 @@ function BetRecommendations({
   setPastNGames,
   recommendationsLoaded,
 }) {
-  const [minEv, setMinEv] = useState(1)
+  const [minEv, setMinEv] = useState(1.05)
   const [prevNumPastGames, setPrevNumPastGames] = useState(N_GAMES)
   const [numPastGames, setNumPastGames] = useState(N_GAMES)
   const [minDiff, setMinDiff] = useState(10)
