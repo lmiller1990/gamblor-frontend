@@ -14,17 +14,21 @@ import { N_GAMES } from '../../constants'
 import './index.scss'
 
 function DemoTooltip({ children }) {
-  return (
-    <OverlayTrigger
-      overlay={
-        <Tooltip id='tooltip-top'>
-          Sign up for more flexibility in analytics and historical data.
-        </Tooltip>
-      }
-    >
-      {children}
-    </OverlayTrigger>
-  )
+  if (process.env.REACT_APP_DEMO_MODE === 'true') {
+    return (
+      <OverlayTrigger
+        overlay={
+          <Tooltip id='tooltip-top'>
+            Sign up for more flexibility in analytics and historical data.
+          </Tooltip>
+        }
+      >
+        {children}
+      </OverlayTrigger>
+    )
+  }
+
+  return <>{children}</>
 }
 
 function BetRecommendations({

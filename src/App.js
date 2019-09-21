@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Alert from 'react-bootstrap/Alert'
 import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 
@@ -92,6 +93,13 @@ function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
   }
 
 
+  const demoAlert = process.env.REACT_APP_DEMO_MODE === 'true' && (
+    <Alert variant='warning'>
+      This is a demo of <a href="https://loltrack.app">LolTrack</a>. 
+      Sign up <a href='#'>here </a>for full access for Spring Split 2019.
+    </Alert>
+  )
+
   const content = () => {
     if (!isLoaded) {
       return <span>Loading...</span>
@@ -99,6 +107,7 @@ function App({ fetchLeagues, fetchTeams, location, isLoaded, teams }) {
 
     return (
       <Container className='p-1'>
+        {demoAlert}
         <Row>
           <Col>
             {marketLineGraph()}
