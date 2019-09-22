@@ -33,3 +33,47 @@ img#preview {
 .align-right {
   text-align: right;
 }
+
+/* input[type="email"], input[type="password"] { */
+input {
+  font-size: 1.2rem;
+  padding: 4px 4px 8px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid silver;
+  width: 100%;
+  font: 1rem trebuchet ms;
+}
+
+input, button[type="submit"] {
+  margin: 8px 0px;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 1px solid grey;
+  transition: 0.5s;
+}
+
+button[type="submit"] {
+  font-size: 1.2rem;
+  padding: 4px 4px 8px 4px;
+  width: 100%;
+  border-radius: 4px;
+  font: 1rem trebuchet ms;
+}
+
+.users {
+  margin: 16px;
+}
+
+.error {
+  color: red;
+}
+
+form.signup {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
