@@ -11,7 +11,7 @@
   <body>
     <div class="wrapper">
       <div class="col">
-        <p id="hero-1">
+        <div id="hero-1">
         <span>
           <span class="c2">
             <b>LolTrack</b>
@@ -29,7 +29,7 @@
           and a 
           <span class="c4">proven model</span>.
         </span>
-        </p>
+        </div>
 
         <p id="hero-2">
         <span>
@@ -40,7 +40,6 @@
         </span>
         </p>
 
-        <hr>
 
         <div class="faqs">
           <div>
@@ -93,10 +92,9 @@
 
       <div class="col align-right">
         <img id="preview" src="preview.png" />
-        <hr>
 
         <div class="users">
-          <a href="#">Existing Users</a>
+          <button id="existing-users" onclick="showSigninForm()">Existing Users</button>
           <form id="signup-page-1" class="signup" onsubmit="createAccount(event)">
             <input id="email"type="email" placeholder="Enter email">
             <input id="password" type="password" placeholder="Enter password">
@@ -105,11 +103,19 @@
             <button type="submit">Create Account</button> 
           </form>
 
-          <form id="signup-page-2" class="signup" style="display: none">
+          <form id="signup-page-2" class="signup" onclick="handlePayment(event)" style="display: none">
             <input type="text" placeholder="Card Number">
             <input type="text" placeholder="MM/YY">
             <input type="text" placeholder="CVC">
             <button type="submit">Pay $50</button> 
+          </form>
+
+
+          <form id="signin-form" class="signup" onsubmit="signin(event)" style="display: none">
+            <input id="signin-email" type="email" placeholder="Enter email">
+            <input id="signin-password" type="password" placeholder="Enter password">
+            <div id="signin-error" class="error"></div>
+            <button type="submit">Sign In</button> 
           </form>
         </div>
       </div>

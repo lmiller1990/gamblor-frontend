@@ -1,11 +1,21 @@
 body {
   background: aliceblue;
   font: 1rem trebuchet ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0px;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 60% 40%;
+  max-width: 1000px;
+}
+
+.col {
+  margin: 24px;
 }
 
 #hero-1 {
@@ -18,11 +28,12 @@ body {
 
 .faqs {
   display: grid;
+  text-align: justify;
   grid-template-columns: 20% 80%;
 }
 
 img#preview {
-  width: 95%;
+  width: 100%;
 }
 
 .c1 { color: gold; }
@@ -64,14 +75,15 @@ button[type="submit"] {
 }
 
 .users {
-  margin: 16px;
+  margin-top: 8px;
+  padding-right: 4px;
 }
 
 .error {
   color: red;
 }
 
-form.signup {
+form.signup, form.signin {
   display: flex;
   justify-content: center;
   flex-direction: column;
