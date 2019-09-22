@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="/index.css">
     <script src="index.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <!--
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="stripe.js"></script>
+    -->
   </head>
   <body>
     <div class="wrapper">
@@ -72,7 +75,8 @@
 
           <div>
             <p>
-            No subscription, no recurring payments - a flat rate of $50 per split.
+            <!-- No subscription, no recurring payments - a flat rate of $50 per split. -->
+            Sign up is currently free, since we are still in beta. The service will be $50 per split when we hit v1.0, however accounts created before then will be free for life.
             </p>
           </div>
         </div>
@@ -84,7 +88,7 @@
 
           <div>
             <p>
-            Yes! You can see our bets and outcomes from Summer 2019 <a href="/historical.html">here</a>.
+            Yes! You can see our bets and outcomes from Summer 2019 <a href="/historical.html">here</a>, or demo the app <a href="/demo">here</a>.
             </p>
           </div>
         </div>
@@ -94,7 +98,7 @@
         <img id="preview" src="preview.png" />
 
         <div class="users">
-          <button id="existing-users" onclick="showSigninForm()">Existing Users</button>
+          <button id="existing-users" onclick="showSigninForm()">Existing Users →</button>
           <form id="signup-page-1" class="signup" onsubmit="createAccount(event)">
             <input id="email"type="email" placeholder="Enter email">
             <input id="password" type="password" placeholder="Enter password">
@@ -103,20 +107,36 @@
             <button type="submit">Create Account</button> 
           </form>
 
-          <form id="signup-page-2" class="signup" onclick="handlePayment(event)" style="display: none">
-            <input type="text" placeholder="Card Number">
-            <input type="text" placeholder="MM/YY">
-            <input type="text" placeholder="CVC">
-            <button type="submit">Pay $50</button> 
+          <form id="signup-page-2" class="signup" style="display: none; text-align: left">
+            <div>
+              Thank you for signing up. Unforutately,  we will not be doing bet recommendations for worlds.
+              <br>
+              <br>
+              Check back early 2020 for LCS/LEC updates!
+            </div>
           </form>
 
+          <!--
+          <form id="signup-page-2" class="signup" style="display: none">
+            <div id="card-number-element" class="stripe-field">
+            </div>
+            <div id="card-expiry-element" class="stripe-field">
+            </div>
+            <div id="card-cvc-element" class="stripe-field">
+            </div>
+            <input id="card-postcode-element" class="stripe-field" placeholder="Post/Zip code" maxlength="5" />
+            <button type="submit">Submit ($50 USD)</button> 
 
-          <form id="signin-form" class="signup" onsubmit="signin(event)" style="display: none">
+            <div class="error" id="card-errors"></div>
+            </form>
+          -->
+
+            <form id="signin-form" class="signup" onsubmit="signin(event)" style="display: none">
             <input id="signin-email" type="email" placeholder="Enter email">
             <input id="signin-password" type="password" placeholder="Enter password">
             <div id="signin-error" class="error"></div>
             <button type="submit">Sign In</button> 
-          </form>
+            </form>
         </div>
       </div>
 

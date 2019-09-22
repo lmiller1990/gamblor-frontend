@@ -45,15 +45,15 @@ img#preview {
   text-align: right;
 }
 
-/* input[type="email"], input[type="password"] { */
-input {
-  font-size: 1.2rem;
+input, .stripe-field {
+  font-size: 16px;
   padding: 4px 4px 8px 4px;
   background: transparent;
   border: none;
   border-bottom: 1px solid silver;
   width: 100%;
   font: 1rem trebuchet ms;
+  margin: 8px 0px;
 }
 
 input, button[type="submit"] {
@@ -62,8 +62,8 @@ input, button[type="submit"] {
 
 input:focus {
   outline: none;
-  border-bottom: 1px solid grey;
-  transition: 0.5s;
+  border-bottom: 1px solid grey !important;
+  transition: 0.5s !important;
 }
 
 button[type="submit"] {
