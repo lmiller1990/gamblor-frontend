@@ -1,3 +1,5 @@
+const API_HOST = '/api'
+
 async function signin(evt) {
   evt.preventDefault()
 
@@ -11,7 +13,7 @@ async function signin(evt) {
   const password = form.querySelector('#signin-password').value
 
   try {
-    const response = await fetch('http://localhost:5000/users/sign_in', {
+    const response = await fetch(`${API_HOST}/users/sign_in`, {
       method: 'PUT',
       mode: 'cors',
       headers: {
@@ -104,7 +106,7 @@ async function createAccount(evt) {
   const password = form.querySelector('#password').value
 
   try {
-    const response = await fetch('http://localhost:5000/users/sign_up', {
+    const response = await fetch(`${API_HOST}/users/sign_up`, {
       method: 'POST',
       mode: 'cors',
       headers: {
