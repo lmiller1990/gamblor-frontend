@@ -2,6 +2,7 @@
   "name": "gamblor-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/app",
   "dependencies": {
     "axios": "^0.19.0",
     "camelcase-keys": "^6.0.1",
