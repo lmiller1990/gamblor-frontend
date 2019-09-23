@@ -30,6 +30,7 @@ body {
   display: grid;
   text-align: justify;
   grid-template-columns: 20% 80%;
+  font-size: 0.8rem;
 }
 
 img#preview {
