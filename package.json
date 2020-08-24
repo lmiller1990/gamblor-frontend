@@ -2,7 +2,7 @@
   "name": "gamblor-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/app",
+  "homepage": "https://lmiller1990.github.io/gamblor-frontend/",
   "dependencies": {
     "axios": "^0.19.0",
     "camelcase-keys": "^6.0.1",
@@ -25,6 +25,8 @@
   },
   "proxy": "http://localhost:5000",
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -44,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }
